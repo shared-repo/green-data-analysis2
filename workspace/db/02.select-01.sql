@@ -46,3 +46,96 @@ select * from emp order by hiredate asc;
 -- 업무별, 급여순으로 직원 조회
 select * from emp order by job asc, sal desc; -- 2개 컬럼 기준 정렬 (1차정렬, 2차정렬)
 
+-- *************************
+
+-- 모든 직원 조회
+select * from emp;
+
+-- 부서번호가 30인 직원 조회
+select * from emp where deptno = 30;
+
+-- 부서번호가 30인 부서이름 조회
+desc dept;
+select * from dept where deptno = 30;
+
+-- 사원번호가 7782인 직원 조회
+desc emp;
+select * from emp where empno = 7782;
+
+-- 부서번호가 30이고 담당업무가 SALESMAN 직원 조회
+select * 
+from emp
+where deptno = 30 and job = 'SALESMAN'; -- 문자열과 날짜는 작은따옴표로 표시
+
+-- 담당업무가 SALESMAN 이면서 급여가 1500이상인 직원 조회
+select *
+from emp
+where job = 'SALESMAN' and sal >= 1500;
+
+-- 사번이 7499이면서 30번 부서 소속인 직원
+select *
+from emp
+where empno = 7499 and deptno = 30;
+
+-- 연봉이 20000이상인 직원 조회
+select *
+from emp
+where sal * 12 >= 20000;
+
+-- 급여가 3000인 직원
+select *
+from emp
+where sal = 3000;
+
+-- 급여가 3000이 아닌 직원
+select *
+from emp
+-- where sal != 3000;
+-- where sal <> 3000;
+where not (sal = 3000);
+
+-- 입사년도가 87년인 직원 조회
+desc emp;
+-- select * from emp;
+select *
+from emp
+where hiredate >= '1987-01-01';
+
+-- 직무가 salesman 또는 manager 또는 analyst인 직원 조회
+select distinct job from emp;
+select *
+from emp
+-- where job = 'SALESMAN' or job = 'MANAGER' or job = 'ANALYST';
+where job in ('SALESMAN', 'MANAGER', 'ANALYST');
+
+-- 직무가 salesman, manager, analyst가 아닌 직원 조회
+select * 
+from emp
+-- where job != 'SALESMAN' and job != 'MANAGER' and job != 'ANALYST';
+where job not in ('SALESMAN', 'MANAGER', 'ANALYST');
+
+-- accounting 부서 또는 research 부서 직원 조회
+select * from dept; -- accounting : 10, research : 20
+select *
+from emp
+-- where deptno = 10 or deptno = 20;
+where deptno in (10, 20);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
