@@ -121,10 +121,67 @@ from emp
 -- where deptno = 10 or deptno = 20;
 where deptno in (10, 20);
 
+-- 급여가 2000이상 3000이하 직원 조회
+select *
+from emp
+-- where sal >= 2000 and sal <= 3000; 
+where sal between 2000 and 3000;
 
+-- 급여가 2000보다 작거나 3000보다 큰 직원 조회
+select *
+from emp
+-- where sal < 2000 or sal > 3000; 
+where sal not between 2000 and 3000;
 
+-- 사원 이름에 AM이 포함된 직원
+select *
+from emp
+where ename LIKE '%AM%';
 
+-- 사원 이름에 AM이 포함되지 않은 직원
+select *
+from emp
+where ename not LIKE '%AM%';
 
+-- 사원이름이 A로 시작하는 직원
+select *
+from emp
+where ename LIKE 'A%';
+
+-- 사원이름의 두 번째 문자가 A인 직원
+select *
+from emp
+where ename LIKE '_A%'; -- % : n개(0개 포함), _ : 1개
+
+-- commision을 받지 않는 조회
+select * 
+from emp
+-- where comm = NULL;
+where comm is NULL; -- NULL을 비교할 때는 반드시 IS NULL 또는 IS NOT NULL 사용
+
+-- commision을 받는 직원 조회
+select * 
+from emp
+-- where comm != NULL;
+where comm is NOT null;
+
+-- 부서코드가 10 또는 20인 직원 조회
+select * from emp where deptno in (10, 20);
+select * from emp where deptno = 10
+union
+select * from emp where deptno = 20;
+
+-- 부서코드가 30이 아닌 직원
+select * from emp where deptno != 30;
+select * from emp
+minus
+select * from emp where deptno = 30;
+
+-- 부서코드가 20인 직원
+select * from emp where deptno = 20;
+select * from emp where deptno in (10, 20)
+intersect
+select * from emp where deptno in (20, 30);
 
 
 
