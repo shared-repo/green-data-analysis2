@@ -60,6 +60,18 @@ from emp e, salgrade s
 where e.sal between s.losal and s.hisal
 order by e.empno;
 
+select e.*, s.*
+from emp e
+inner join salgrade s
+on e.sal between s.losal and s.hisal
+order by e.empno;
+
+-- emp 테이블에서 empno, ename, job, mgr, mgr의 이름
+select e1.empno, e1.ename, e1.job, e1.mgr, e2.ename mgrname
+from emp e1, emp e2
+where e1.mgr = e2.empno;
+
+
 
 
 
