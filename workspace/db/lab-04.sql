@@ -107,13 +107,30 @@ where l.city = 'Oxford';
 -- HR 스키마에 있는 Employees, Departments 테이블의 구조를 파악한 후 
 -- 사원 수가 다섯 명 이상인 부서의 부서이름과 사원 수를 출력하시오. 
 -- 이때 사원 수가 많은 순으로 정렬하시오
-
+select d.department_name, count(e.employee_id) 사원수
+from employees e, departments d
+where e.department_id = d.department_id
+group by d.department_name
+having count(e.employee_id) >= 5
+order by 사원수;
 
 -- 각 사원의 급여에 따른 급여 등급을 보고하려고 한다. 
 -- 급여 등급은 범위로 Jobs 테이블에 표시된다. ( employees와 jobs를 equi join )
 -- 해당 테이블의 구조를 살펴본 후 사원의 이름과 성(Name으로 별칭), 업무, 부서이름, 입사일, 급여, 급여범위를 출력하시오
+select 
+    e.first_name || ' ' || e.last_name name,
+    j.job_title, d.department_name,
+    e.hire_date, e.salary, j.min_salary, j.max_salary
+from employees e, jobs j, departments d
+where e.job_id = j.job_id and e.department_id = d.department_id;
 
 -- 각 사원과 직속 상사와의 관계를 이용하여 다음과 같은 형식의 보고서를 작성하고자 한다.
 -- (예) 홍길동은 허균에게 보고한다 → Eleni Zlotkey report to Steven King
 -- 어떤 사원이 누구에게 보고하는지 위 예를 참고하여 출력하시오. 
 -- 단, 보고할 상사가 없는 사원이 있다면 그 정보도 포함하여 출력하고, 상사의 이름과 성은 대문자로 출력하시오
+select e1.first_name || ' ' || e1.last_name || 
+       ' report to ' || 
+       upper(e2.first_name || ' ' || e2.last_name) 관계보고서 
+from employees e1, employees e2
+where e1.manager_id = e2.employee_id(+);
+
