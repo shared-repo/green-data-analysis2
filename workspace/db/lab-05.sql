@@ -42,9 +42,33 @@ select *
 from orders o
 where o.saleprice <= ( select avg(saleprice) from orders );
 
--- 각 고객의 평균 주문금액보다 큰 금액의 주문 내역에 대해서 주문번호, 고객번호, 금액을 보이시오
+-- 각 고객의 평균 주문금액보다 큰 금액의 주문 내역에 대해서 
+-- 주문번호, 고객번호, 금액을 보이시오
+select *
+from orders o
+-- where o.saleprice > 현재 처리중인 행의 고객 아이디로 주문한 구매가격의 평균
+where o.saleprice > ( select avg(o2.saleprice)
+                      from orders o2 
+                      where o.custid = o2.custid );
+                      
 -- 대한민국에 거주하는 고객에게 판매한 도서의 총판매액을 구하시오
--- 3번 고객이 주문한 도서의 최고 금액보다 더 비싼 도서를 구입한 주문의 주문번호와 금액을 보이시오
+select * from customer where address like '대한민국%';
+
+select sum(saleprice) 대한민국_총판매액
+from orders o
+where o.custid in ( select c.custid 
+                    from customer c 
+                    where c.address like '대한민국%' );
+
+-- 3번 고객이 주문한 도서의 최고 금액보다 
+-- 더 비싼 도서를 구입한 주문의 주문번호와 금액을 보이시오
+select max(saleprice) from orders where custid = 3;
+select *
+from orders o
+where o.saleprice > ( select max(o2.saleprice) 
+                      from orders o2 
+                      where o2.custid = 3 ); 
+
 -- EXISTS 연산자로 대한민국에 거주하는 고객에게 판매한 도서의 총 판매액을 구하시오
 -- 마당서점의 고객별 판매액을 보이시오(결과는 고객이름과 고객별 판매액을 출력).
 -- Orders 테이블에 각 주문에 맞는 도서이름을 조회하시오
