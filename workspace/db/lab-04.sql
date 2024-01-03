@@ -59,16 +59,51 @@ inner join book b
 on o.bookid = b.bookid;
 
 -- 가격이 20,000원인 도서를 주문한 고객의 이름과 도서의 이름을 구하시오
+select c.name, b.bookname, b.price
+from customer c, orders o, book b
+where b.price = 20000 
+      and 
+      c.custid = o.custid and o.bookid = b.bookid;
+
+select c.name, b.bookname, b.price
+from customer c 
+inner join orders o
+on c.custid = o.custid
+inner join book b
+on o.bookid = b.bookid
+where b.price = 20000;
 
 -- 도서를 구매하지 않은 고객을 포함하여 고객의 이름과 고객이 주문한 도서의 판매가격을 구하시오
-
+-- 위의 연습으로 대체
 
 -- hr 계정으로 실행
 
 -- HR 스키마에 존재하는 Employees, Departments, Locations 테이블의 구조를 파악한 후 
 -- Oxford에 근무하는 사원의 이름과 성(Name으로 별칭), 업무, 부서이름, 도시이름을 출력하시오. 
 -- 이때 첫 번째 열은 회사이름인 ‘GREEN-IT’라는 상수값이 출력되도록 하시오
+select * from locations where city = 'Oxford';
+select 
+    'GREEN-IT' 회사이름, 
+    e.first_name || ' ' || e.last_name name,
+    e.job_id, d.department_name, l.city
+from employees e, departments d, locations l
+where l.city = 'Oxford'
+      and 
+      e.department_id = d.department_id 
+      and 
+      d.location_id = l.location_id;
 
+select 
+    'GREEN-IT' 회사이름, 
+    e.first_name || ' ' || e.last_name name,
+    e.job_id, d.department_name, l.city
+from employees e
+inner join departments d
+on e.department_id = d.department_id 
+inner join locations l
+on d.location_id = l.location_id
+where l.city = 'Oxford';
+      
 -- HR 스키마에 있는 Employees, Departments 테이블의 구조를 파악한 후 
 -- 사원 수가 다섯 명 이상인 부서의 부서이름과 사원 수를 출력하시오. 
 -- 이때 사원 수가 많은 순으로 정렬하시오
