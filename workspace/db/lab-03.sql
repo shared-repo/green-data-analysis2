@@ -58,7 +58,30 @@ where manager_id is not null; -- 생략 가능 (집계함수는 null 제외하고 수행)
 
 -- 각 사원이 소속된 부서별로 급여 합계, 급여 평균, 급여 최댓값, 급여 최솟값을 집계하고자 한다. 
 -- 단, 부서에 소속되지 않은 사원에 대한 정보는 제외
+select * from employees;
+select department_id, 
+        round(sum(salary), 2) 급여총액, 
+        round(avg(salary), 2) 급여평균, 
+        round(min(salary), 2) 최소급여, 
+        round(max(salary), 2) 최대급여
+from employees
+where department_id is not null
+group by department_id
+order by 급여평균 desc;
+
+select * from departments;
+
+-- 사원들의 업무별 전체 급여 평균이 $10,000보다 큰 경우를 조회하여 
+--  업무별 급여 평균을 출력하시오. 
+-- 단 업무에 사원(CLERK)이 포함된 경우는 제외하고 
+--전체 급여 평균이 높은 순서대로 출력하시오
+select * from employees;
+select job_id, avg(salary) 급여평균
+from employees
+where job_id not like '%CLERK%'
+group by job_id
+having avg(salary) > 10000
+order by 급여평균 desc;
 
 
--- 사원들의 업무별 전체 급여 평균이 $10,000보다 큰 경우를 조회하여 업무별 급여 평균을 출력하시오. 
--- 단 업무에 사원(CLERK)이 포함된 경우는 제외하고 전체 급여 평균이 높은 순서대로 출력하시오
+
