@@ -70,6 +70,48 @@ where o.saleprice > ( select max(o2.saleprice)
                       where o2.custid = 3 ); 
 
 -- EXISTS 연산자로 대한민국에 거주하는 고객에게 판매한 도서의 총 판매액을 구하시오
+select sum(saleprice) 대한민국_총판매액
+from orders o
+where exists ( select c.custid 
+               from customer c 
+               where c.custid = o.custid and c.address like '대한민국%' );
+                    
 -- 마당서점의 고객별 판매액을 보이시오(결과는 고객이름과 고객별 판매액을 출력).
+select c.name, sum(o.saleprice)
+from customer c, orders o
+where c.custid = o.custid
+group by c.name;
+
+select 
+    ( select c.name
+      from customer c
+      where c.custid = o.custid ) name,
+    sum(o.saleprice)
+from orders o
+group by o.custid;
+
 -- Orders 테이블에 각 주문에 맞는 도서이름을 조회하시오
--- 고객번호가 2 이하인 고객의 판매액을 보이시오 (결과는 고객이름과 고객별 판매액 출력)
+select o.*, (select b.bookname from book b where o.bookid = b.bookid)
+from orders o;
+
+select o.*, b.bookname
+from orders o, book b
+where o.bookid = b.bookid;
+
+-- 고객번호가 2 이하인 고객의 판매액을 보이시오 
+-- (결과는 고객이름과 고객별 판매액 출력)
+select c.custid, c.name, sum(o.saleprice) 구매액
+from customer c, orders o
+where c.custid = o.custid and c.custid <= 2
+group by c.custid, c.name;
+
+select c.custid, c.name, sum(o.saleprice) 구매액
+from 
+    ( select * from customer where custid <= 2 ) c,
+    orders o
+where c.custid = o.custid
+group by c.custid, c.name;
+
+
+
+
