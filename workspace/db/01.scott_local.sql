@@ -1,4 +1,4 @@
--- Å×ÀÌºí ¸¸µé±â + µ¥ÀÌÅÍ ÀúÀå
+-- í…Œì´ë¸” ë§Œë“¤ê¸° + ë°ì´í„° ì €ìž¥
 
 DROP TABLE DEPT;
 CREATE TABLE DEPT

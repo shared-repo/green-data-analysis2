@@ -1,10 +1,10 @@
--- hr °èÁ¤À¸·Î ÀÛ¾÷ ¼öÇà
+-- hr ê³„ì •ìœ¼ë¡œ ìž‘ì—… ìˆ˜í–‰
 select 'abc' || ' ' || 'def' from dual;
 
--- Å×ÀÌºí Å½»ö
+-- í…Œì´ë¸” íƒìƒ‰
 
--- »ç¿øÁ¤º¸(Employees) Å×ÀÌºí¿¡¼­ »ç¿ø¹øÈ£, ÀÌ¸§, ±Þ¿©, ¾÷¹«, ÀÔ»çÀÏ, »ó»çÀÇ »ç¿ø¹øÈ£¸¦ Ãâ·ÂÇÏ½Ã¿À. 
--- ÀÌ¶§ ÀÌ¸§Àº ÀÌ¸§°ú ¼ºÀ» ¿¬°áÇÏ¿© NameÀÌ¶ó´Â º°ÄªÀ¸·Î Ãâ·ÂÇÏ½Ã¿À
+-- ì‚¬ì›ì •ë³´(Employees) í…Œì´ë¸”ì—ì„œ ì‚¬ì›ë²ˆí˜¸, ì´ë¦„, ê¸‰ì—¬, ì—…ë¬´, ìž…ì‚¬ì¼, ìƒì‚¬ì˜ ì‚¬ì›ë²ˆí˜¸ë¥¼ ì¶œë ¥í•˜ì‹œì˜¤. 
+-- ì´ë•Œ ì´ë¦„ì€ ì´ë¦„ê³¼ ì„±ì„ ì—°ê²°í•˜ì—¬ Nameì´ë¼ëŠ” ë³„ì¹­ìœ¼ë¡œ ì¶œë ¥í•˜ì‹œì˜¤
 select 
     employee_id
     , first_name || ' ' || last_name as Name
@@ -15,9 +15,9 @@ select
 from 
     employees;
 
--- »ç¿øÁ¤º¸(Employees) Å×ÀÌºí¿¡¼­ »ç¿øÀÇ ÀÌ¸§°ú ¼ºÀº Name, ¾÷¹«´Â Job, ±Þ¿©´Â Salary, 
--- ¿¬ºÀ¿¡ $100 º¸³Ê½º¸¦ Ãß°¡ÇÏ¿© °è»êÇÑ °ªÀº Increase Ann_Salary, 
--- ±Þ¿©¿¡ $100 º¸³Ê½º¸¦ Ãß°¡ÇÏ¿© °è»êÇÑ ¿¬ºÀÀº Increase Salary¶ó´Â º°ÄªÀ» ºÙ¿© Ãâ·ÂÇÏ½Ã¿À
+-- ì‚¬ì›ì •ë³´(Employees) í…Œì´ë¸”ì—ì„œ ì‚¬ì›ì˜ ì´ë¦„ê³¼ ì„±ì€ Name, ì—…ë¬´ëŠ” Job, ê¸‰ì—¬ëŠ” Salary, 
+-- ì—°ë´‰ì— $100 ë³´ë„ˆìŠ¤ë¥¼ ì¶”ê°€í•˜ì—¬ ê³„ì‚°í•œ ê°’ì€ Increase Ann_Salary, 
+-- ê¸‰ì—¬ì— $100 ë³´ë„ˆìŠ¤ë¥¼ ì¶”ê°€í•˜ì—¬ ê³„ì‚°í•œ ì—°ë´‰ì€ Increase Salaryë¼ëŠ” ë³„ì¹­ì„ ë¶™ì—¬ ì¶œë ¥í•˜ì‹œì˜¤
 select 
     first_name || ' ' || last_name as Name,
     job_id job,
@@ -26,20 +26,20 @@ select
     (salary + 100) * 12 "Increase Salary"
 from employees;
 
--- »ç¿øÁ¤º¸(Employees) Å×ÀÌºí¿¡¼­ ¸ðµç »ç¿øÀÇ ¼º(last_name)°ú ¿¬ºÀÀ» 
--- ¡°¼º: 1 Year Salary = $¿¬ºÀ¡± Çü½ÄÀ¸·Î Ãâ·ÂÇÏ°í, 1 Year Salary¶ó´Â º°ÄªÀ» ºÙ¿© Ãâ·ÂÇÏ½Ã¿À
+-- ì‚¬ì›ì •ë³´(Employees) í…Œì´ë¸”ì—ì„œ ëª¨ë“  ì‚¬ì›ì˜ ì„±(last_name)ê³¼ ì—°ë´‰ì„ 
+-- â€œì„±: 1 Year Salary = $ì—°ë´‰â€ í˜•ì‹ìœ¼ë¡œ ì¶œë ¥í•˜ê³ , 1 Year Salaryë¼ëŠ” ë³„ì¹­ì„ ë¶™ì—¬ ì¶œë ¥í•˜ì‹œì˜¤
 select 
     last_name || ': 1 Year Salary = $' || salary * 12 as "1 Year Salary"
 from employees;
 
--- ºÎ¼­º°·Î ´ã´çÇÏ´Â ¾÷¹«¸¦ ÇÑ ¹ø¾¿¸¸ Ãâ·ÂÇÏ½Ã¿À
+-- ë¶€ì„œë³„ë¡œ ë‹´ë‹¹í•˜ëŠ” ì—…ë¬´ë¥¼ í•œ ë²ˆì”©ë§Œ ì¶œë ¥í•˜ì‹œì˜¤
 select distinct department_id, job_id 
 from employees
 order by department_id;
 
--- HR ºÎ¼­¿¡¼­ ¿¹»ê Æí¼º ¹®Á¦·Î ±Þ¿© Á¤º¸ º¸°í¼­¸¦ ÀÛ¼ºÇÏ·Á°í ÇÑ´Ù. 
--- »ç¿øÁ¤º¸(Employees) Å×ÀÌºí¿¡¼­ ±Þ¿©°¡ $7,000~$10,000 ¹üÀ§ ÀÌ¿ÜÀÎ »ç¶÷ÀÇ 
--- ÀÌ¸§°ú ¼º(NameÀ¸·Î º°Äª) ¹× ±Þ¿©¸¦ ±Þ¿©°¡ ÀûÀº ¼ø¼­·Î Ãâ·ÂÇÏ½Ã¿À
+-- HR ë¶€ì„œì—ì„œ ì˜ˆì‚° íŽ¸ì„± ë¬¸ì œë¡œ ê¸‰ì—¬ ì •ë³´ ë³´ê³ ì„œë¥¼ ìž‘ì„±í•˜ë ¤ê³  í•œë‹¤. 
+-- ì‚¬ì›ì •ë³´(Employees) í…Œì´ë¸”ì—ì„œ ê¸‰ì—¬ê°€ $7,000~$10,000 ë²”ìœ„ ì´ì™¸ì¸ ì‚¬ëžŒì˜ 
+-- ì´ë¦„ê³¼ ì„±(Nameìœ¼ë¡œ ë³„ì¹­) ë° ê¸‰ì—¬ë¥¼ ê¸‰ì—¬ê°€ ì ì€ ìˆœì„œë¡œ ì¶œë ¥í•˜ì‹œì˜¤
 select 
     first_name || ' ' || last_name Name,
     salary
@@ -47,15 +47,15 @@ from employees
 where salary not between 7000 and 10000
 order by salary asc;
 
--- »ç¿øÀÇ ¼º(last_name) Áß¿¡ ¡®e¡¯ ¹× ¡®o¡¯ ±ÛÀÚ°¡ Æ÷ÇÔµÈ »ç¿øÀ» Ãâ·ÂÇÏ½Ã¿À. 
--- ÀÌ¶§ ¸Ó¸®±ÛÀº ¡®e or o Name¡¯ÀÌ¶ó°í Ãâ·ÂÇÏ½Ã¿À
+-- ì‚¬ì›ì˜ ì„±(last_name) ì¤‘ì— â€˜eâ€™ ë° â€˜oâ€™ ê¸€ìžê°€ í¬í•¨ëœ ì‚¬ì›ì„ ì¶œë ¥í•˜ì‹œì˜¤. 
+-- ì´ë•Œ ë¨¸ë¦¬ê¸€ì€ â€˜e or o Nameâ€™ì´ë¼ê³  ì¶œë ¥í•˜ì‹œì˜¤
 select last_name "e or o Name"
 from employees
 where last_name like '%e%' or last_name like '%o%';
 
--- 2006³â 05¿ù 20ÀÏºÎÅÍ 2007³â 05¿ù 20ÀÏ »çÀÌ¿¡ °í¿ëµÈ »ç¿øµéÀÇ 
--- ÀÌ¸§°ú ¼º(NameÀ¸·Î º°Äª), ¾÷¹«, ÀÔ»çÀÏÀ» Ãâ·ÂÇÏ½Ã¿À. 
--- ´Ü, ÀÔ»çÀÏÀÌ ºü¸¥ ¼øÀ¸·Î Á¤·ÄÇÏ½Ã¿À
+-- 2006ë…„ 05ì›” 20ì¼ë¶€í„° 2007ë…„ 05ì›” 20ì¼ ì‚¬ì´ì— ê³ ìš©ëœ ì‚¬ì›ë“¤ì˜ 
+-- ì´ë¦„ê³¼ ì„±(Nameìœ¼ë¡œ ë³„ì¹­), ì—…ë¬´, ìž…ì‚¬ì¼ì„ ì¶œë ¥í•˜ì‹œì˜¤. 
+-- ë‹¨, ìž…ì‚¬ì¼ì´ ë¹ ë¥¸ ìˆœìœ¼ë¡œ ì •ë ¬í•˜ì‹œì˜¤
 select 
     first_name || ' ' || last_name Name,
     job_id,
@@ -64,9 +64,9 @@ from employees
 where hire_date between '2006-05-20' and '2007-05-20'
 order by hire_date asc;
 
--- HR ºÎ¼­¿¡¼­´Â ±Þ¿©(salary)¿Í ¼ö´çÀ²(commission_pct)¿¡ ´ëÇÑ ÁöÃâ º¸°í¼­¸¦ ÀÛ¼ºÇÏ·Á°í ÇÑ´Ù. 
--- ¼ö´çÀ» ¹Þ´Â ¸ðµç »ç¿øÀÇ ÀÌ¸§°ú ¼º(NameÀ¸·Î º°Äª), ±Þ¿©, ¾÷¹«, ¼ö´çÀ²À» Ãâ·ÂÇÏ½Ã¿À. 
--- ÀÌ¶§ ±Þ¿©°¡ Å« ¼ø¼­´ë·Î Á¤·ÄÇÏµÇ, ±Þ¿©°¡ °°À¸¸é ¼ö´çÀ²ÀÌ Å« ¼ø¼­´ë·Î Á¤·ÄÇÏ½Ã¿À
+-- HR ë¶€ì„œì—ì„œëŠ” ê¸‰ì—¬(salary)ì™€ ìˆ˜ë‹¹ìœ¨(commission_pct)ì— ëŒ€í•œ ì§€ì¶œ ë³´ê³ ì„œë¥¼ ìž‘ì„±í•˜ë ¤ê³  í•œë‹¤. 
+-- ìˆ˜ë‹¹ì„ ë°›ëŠ” ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„ê³¼ ì„±(Nameìœ¼ë¡œ ë³„ì¹­), ê¸‰ì—¬, ì—…ë¬´, ìˆ˜ë‹¹ìœ¨ì„ ì¶œë ¥í•˜ì‹œì˜¤. 
+-- ì´ë•Œ ê¸‰ì—¬ê°€ í° ìˆœì„œëŒ€ë¡œ ì •ë ¬í•˜ë˜, ê¸‰ì—¬ê°€ ê°™ìœ¼ë©´ ìˆ˜ë‹¹ìœ¨ì´ í° ìˆœì„œëŒ€ë¡œ ì •ë ¬í•˜ì‹œì˜¤
 select 
     first_name || ' ' || last_name Name,
     salary,

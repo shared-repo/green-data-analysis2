@@ -1,67 +1,67 @@
--- kdtda2 °èÁ¤À¸·Î ½ÇÇà
+-- kdtda2 ê³„ì •ìœ¼ë¡œ ì‹¤í–‰
 
--- °¡Àå ºñ½Ñ µµ¼­ÀÇ ÀÌ¸§À» º¸ÀÌ½Ã¿À
+-- ê°€ì¥ ë¹„ì‹¼ ë„ì„œì˜ ì´ë¦„ì„ ë³´ì´ì‹œì˜¤
 select max(price) from book;
 select * 
 from book
 where price = ( select max(price) from book );
 
--- µµ¼­¸¦ ±¸¸ÅÇÑ ÀûÀÌ ÀÖ´Â °í°´ÀÇ ÀÌ¸§À» °Ë»öÇÏ½Ã¿À
+-- ë„ì„œë¥¼ êµ¬ë§¤í•œ ì ì´ ìˆëŠ” ê³ ê°ì˜ ì´ë¦„ì„ ê²€ìƒ‰í•˜ì‹œì˜¤
 select distinct custid from orders;
 select *
 from customer c 
 where c.custid in ( select distinct o.custid from orders o );
 
--- ´ëÇÑ¹Ìµğ¾î¿¡¼­ ÃâÆÇÇÑ µµ¼­¸¦ ±¸¸ÅÇÑ °í°´ÀÇ ÀÌ¸§À» º¸ÀÌ½Ã¿À
-select * from book where publisher = '´ëÇÑ¹Ìµğ¾î';
+-- ëŒ€í•œë¯¸ë””ì–´ì—ì„œ ì¶œíŒí•œ ë„ì„œë¥¼ êµ¬ë§¤í•œ ê³ ê°ì˜ ì´ë¦„ì„ ë³´ì´ì‹œì˜¤
+select * from book where publisher = 'ëŒ€í•œë¯¸ë””ì–´';
 select *
 from customer c, orders o
 where c.custid = o.custid 
       and 
       o.bookid in ( select bookid 
                     from book 
-                    where publisher = '´ëÇÑ¹Ìµğ¾î' );
+                    where publisher = 'ëŒ€í•œë¯¸ë””ì–´' );
       
 select distinct bookid from orders;
 
--- ÃâÆÇ»çº°·Î ÃâÆÇ»çÀÇ Æò±Õ µµ¼­ °¡°İº¸´Ù ºñ½Ñ µµ¼­¸¦ ±¸ÇÏ½Ã¿À ( ÇĞ½ÀÇÏÁö ¾ÊÀº ³»¿ë )
+-- ì¶œíŒì‚¬ë³„ë¡œ ì¶œíŒì‚¬ì˜ í‰ê·  ë„ì„œ ê°€ê²©ë³´ë‹¤ ë¹„ì‹¼ ë„ì„œë¥¼ êµ¬í•˜ì‹œì˜¤ ( í•™ìŠµí•˜ì§€ ì•Šì€ ë‚´ìš© )
 select *
 from book b
 where b.price > ( select avg(b2.price)
                   from book b2 
                   where b.publisher = b2.publisher );
                   
--- ÁÖ¹®ÀÌ ÀÖ´Â °í°´ÀÇ ÀÌ¸§°ú ÁÖ¼Ò¸¦ º¸ÀÌ½Ã¿À
+-- ì£¼ë¬¸ì´ ìˆëŠ” ê³ ê°ì˜ ì´ë¦„ê³¼ ì£¼ì†Œë¥¼ ë³´ì´ì‹œì˜¤
 select *
 from customer c
 where c.custid in ( select distinct custid from orders );
 
--- Æò±Õ ÁÖ¹®±İ¾× ÀÌÇÏÀÇ ÁÖ¹®¿¡ ´ëÇØ¼­ ÁÖ¹®¹øÈ£¿Í ±İ¾×À» º¸ÀÌ½Ã¿À
+-- í‰ê·  ì£¼ë¬¸ê¸ˆì•¡ ì´í•˜ì˜ ì£¼ë¬¸ì— ëŒ€í•´ì„œ ì£¼ë¬¸ë²ˆí˜¸ì™€ ê¸ˆì•¡ì„ ë³´ì´ì‹œì˜¤
 select avg(saleprice) from orders;
 select *
 from orders o
 where o.saleprice <= ( select avg(saleprice) from orders );
 
--- °¢ °í°´ÀÇ Æò±Õ ÁÖ¹®±İ¾×º¸´Ù Å« ±İ¾×ÀÇ ÁÖ¹® ³»¿ª¿¡ ´ëÇØ¼­ 
--- ÁÖ¹®¹øÈ£, °í°´¹øÈ£, ±İ¾×À» º¸ÀÌ½Ã¿À
+-- ê° ê³ ê°ì˜ í‰ê·  ì£¼ë¬¸ê¸ˆì•¡ë³´ë‹¤ í° ê¸ˆì•¡ì˜ ì£¼ë¬¸ ë‚´ì—­ì— ëŒ€í•´ì„œ 
+-- ì£¼ë¬¸ë²ˆí˜¸, ê³ ê°ë²ˆí˜¸, ê¸ˆì•¡ì„ ë³´ì´ì‹œì˜¤
 select *
 from orders o
--- where o.saleprice > ÇöÀç Ã³¸®ÁßÀÎ ÇàÀÇ °í°´ ¾ÆÀÌµğ·Î ÁÖ¹®ÇÑ ±¸¸Å°¡°İÀÇ Æò±Õ
+-- where o.saleprice > í˜„ì¬ ì²˜ë¦¬ì¤‘ì¸ í–‰ì˜ ê³ ê° ì•„ì´ë””ë¡œ ì£¼ë¬¸í•œ êµ¬ë§¤ê°€ê²©ì˜ í‰ê· 
 where o.saleprice > ( select avg(o2.saleprice)
                       from orders o2 
                       where o.custid = o2.custid );
                       
--- ´ëÇÑ¹Î±¹¿¡ °ÅÁÖÇÏ´Â °í°´¿¡°Ô ÆÇ¸ÅÇÑ µµ¼­ÀÇ ÃÑÆÇ¸Å¾×À» ±¸ÇÏ½Ã¿À
-select * from customer where address like '´ëÇÑ¹Î±¹%';
+-- ëŒ€í•œë¯¼êµ­ì— ê±°ì£¼í•˜ëŠ” ê³ ê°ì—ê²Œ íŒë§¤í•œ ë„ì„œì˜ ì´íŒë§¤ì•¡ì„ êµ¬í•˜ì‹œì˜¤
+select * from customer where address like 'ëŒ€í•œë¯¼êµ­%';
 
-select sum(saleprice) ´ëÇÑ¹Î±¹_ÃÑÆÇ¸Å¾×
+select sum(saleprice) ëŒ€í•œë¯¼êµ­_ì´íŒë§¤ì•¡
 from orders o
 where o.custid in ( select c.custid 
                     from customer c 
-                    where c.address like '´ëÇÑ¹Î±¹%' );
+                    where c.address like 'ëŒ€í•œë¯¼êµ­%' );
 
--- 3¹ø °í°´ÀÌ ÁÖ¹®ÇÑ µµ¼­ÀÇ ÃÖ°í ±İ¾×º¸´Ù 
--- ´õ ºñ½Ñ µµ¼­¸¦ ±¸ÀÔÇÑ ÁÖ¹®ÀÇ ÁÖ¹®¹øÈ£¿Í ±İ¾×À» º¸ÀÌ½Ã¿À
+-- 3ë²ˆ ê³ ê°ì´ ì£¼ë¬¸í•œ ë„ì„œì˜ ìµœê³  ê¸ˆì•¡ë³´ë‹¤ 
+-- ë” ë¹„ì‹¼ ë„ì„œë¥¼ êµ¬ì…í•œ ì£¼ë¬¸ì˜ ì£¼ë¬¸ë²ˆí˜¸ì™€ ê¸ˆì•¡ì„ ë³´ì´ì‹œì˜¤
 select max(saleprice) from orders where custid = 3;
 select *
 from orders o
@@ -69,14 +69,14 @@ where o.saleprice > ( select max(o2.saleprice)
                       from orders o2 
                       where o2.custid = 3 ); 
 
--- EXISTS ¿¬»êÀÚ·Î ´ëÇÑ¹Î±¹¿¡ °ÅÁÖÇÏ´Â °í°´¿¡°Ô ÆÇ¸ÅÇÑ µµ¼­ÀÇ ÃÑ ÆÇ¸Å¾×À» ±¸ÇÏ½Ã¿À
-select sum(saleprice) ´ëÇÑ¹Î±¹_ÃÑÆÇ¸Å¾×
+-- EXISTS ì—°ì‚°ìë¡œ ëŒ€í•œë¯¼êµ­ì— ê±°ì£¼í•˜ëŠ” ê³ ê°ì—ê²Œ íŒë§¤í•œ ë„ì„œì˜ ì´ íŒë§¤ì•¡ì„ êµ¬í•˜ì‹œì˜¤
+select sum(saleprice) ëŒ€í•œë¯¼êµ­_ì´íŒë§¤ì•¡
 from orders o
 where exists ( select c.custid 
                from customer c 
-               where c.custid = o.custid and c.address like '´ëÇÑ¹Î±¹%' );
+               where c.custid = o.custid and c.address like 'ëŒ€í•œë¯¼êµ­%' );
                     
--- ¸¶´ç¼­Á¡ÀÇ °í°´º° ÆÇ¸Å¾×À» º¸ÀÌ½Ã¿À(°á°ú´Â °í°´ÀÌ¸§°ú °í°´º° ÆÇ¸Å¾×À» Ãâ·Â).
+-- ë§ˆë‹¹ì„œì ì˜ ê³ ê°ë³„ íŒë§¤ì•¡ì„ ë³´ì´ì‹œì˜¤(ê²°ê³¼ëŠ” ê³ ê°ì´ë¦„ê³¼ ê³ ê°ë³„ íŒë§¤ì•¡ì„ ì¶œë ¥).
 select c.name, sum(o.saleprice)
 from customer c, orders o
 where c.custid = o.custid
@@ -90,7 +90,7 @@ select
 from orders o
 group by o.custid;
 
--- Orders Å×ÀÌºí¿¡ °¢ ÁÖ¹®¿¡ ¸Â´Â µµ¼­ÀÌ¸§À» Á¶È¸ÇÏ½Ã¿À
+-- Orders í…Œì´ë¸”ì— ê° ì£¼ë¬¸ì— ë§ëŠ” ë„ì„œì´ë¦„ì„ ì¡°íšŒí•˜ì‹œì˜¤
 select o.*, (select b.bookname from book b where o.bookid = b.bookid)
 from orders o;
 
@@ -98,14 +98,14 @@ select o.*, b.bookname
 from orders o, book b
 where o.bookid = b.bookid;
 
--- °í°´¹øÈ£°¡ 2 ÀÌÇÏÀÎ °í°´ÀÇ ÆÇ¸Å¾×À» º¸ÀÌ½Ã¿À 
--- (°á°ú´Â °í°´ÀÌ¸§°ú °í°´º° ÆÇ¸Å¾× Ãâ·Â)
-select c.custid, c.name, sum(o.saleprice) ±¸¸Å¾×
+-- ê³ ê°ë²ˆí˜¸ê°€ 2 ì´í•˜ì¸ ê³ ê°ì˜ íŒë§¤ì•¡ì„ ë³´ì´ì‹œì˜¤ 
+-- (ê²°ê³¼ëŠ” ê³ ê°ì´ë¦„ê³¼ ê³ ê°ë³„ íŒë§¤ì•¡ ì¶œë ¥)
+select c.custid, c.name, sum(o.saleprice) êµ¬ë§¤ì•¡
 from customer c, orders o
 where c.custid = o.custid and c.custid <= 2
 group by c.custid, c.name;
 
-select c.custid, c.name, sum(o.saleprice) ±¸¸Å¾×
+select c.custid, c.name, sum(o.saleprice) êµ¬ë§¤ì•¡
 from 
     ( select * from customer where custid <= 2 ) c,
     orders o

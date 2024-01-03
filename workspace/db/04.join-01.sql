@@ -1,19 +1,19 @@
--- ¹®Á¦»óÈ² 1. SALES ºÎ¼­¿¡ ±Ù¹«ÇÏ´Â Á÷¿ø Á¶È¸
-select * from emp; -- SALES ºÎ¼­ È®ÀÎ ºÒ°¡
-select * from dept; -- SALES ºÎ¼­ÀÇ ºÎ¼­¹øÈ£ È®ÀÎ --> 30
-SELECT * FROM emp where deptno = 30; -- À§¿¡¼­ È®ÀÎÇÑ ºÎ¼­¹øÈ£·Î Á¶È¸
+-- ë¬¸ì œìƒí™© 1. SALES ë¶€ì„œì— ê·¼ë¬´í•˜ëŠ” ì§ì› ì¡°íšŒ
+select * from emp; -- SALES ë¶€ì„œ í™•ì¸ ë¶ˆê°€
+select * from dept; -- SALES ë¶€ì„œì˜ ë¶€ì„œë²ˆí˜¸ í™•ì¸ --> 30
+SELECT * FROM emp where deptno = 30; -- ìœ„ì—ì„œ í™•ì¸í•œ ë¶€ì„œë²ˆí˜¸ë¡œ ì¡°íšŒ
 
--- ¹®Á¦»óÈ² 2. »ç¹ø, ÀÌ¸§, ¾÷¹«, ÀÔ»çÀÏÀÚ, ºÎ¼­ÀÌ¸§ Á¶È¸
+-- ë¬¸ì œìƒí™© 2. ì‚¬ë²ˆ, ì´ë¦„, ì—…ë¬´, ì…ì‚¬ì¼ì, ë¶€ì„œì´ë¦„ ì¡°íšŒ
 select * from emp;
 
--- Á¶ÀÎ 1. »ç¹ø, ÀÌ¸§, ¾÷¹«, ÀÔ»çÀÏÀÚ, ºÎ¼­ÀÌ¸§ Á¶È¸ ( cross join )
+-- ì¡°ì¸ 1. ì‚¬ë²ˆ, ì´ë¦„, ì—…ë¬´, ì…ì‚¬ì¼ì, ë¶€ì„œì´ë¦„ ì¡°íšŒ ( cross join )
 select count(*) from emp;
 select count(*) from dept;
 select *
 from emp, dept
 order by empno;
 
--- Á¶ÀÎ 2. »ç¹ø, ÀÌ¸§, ¾÷¹«, ÀÔ»çÀÏÀÚ, ºÎ¼­ÀÌ¸§ Á¶È¸ ( inner join )
+-- ì¡°ì¸ 2. ì‚¬ë²ˆ, ì´ë¦„, ì—…ë¬´, ì…ì‚¬ì¼ì, ë¶€ì„œì´ë¦„ ì¡°íšŒ ( inner join )
 select empno, ename, job, hiredate, dname
 from emp, dept
 where emp.deptno = dept.deptno;
@@ -21,14 +21,14 @@ where emp.deptno = dept.deptno;
 select empno, ename, job, hiredate, dname
 from emp
 inner join dept
-on emp.deptno = dept.deptno; -- on : join¿¡ ´ëÇÑ where
+on emp.deptno = dept.deptno; -- on : joinì— ëŒ€í•œ where
 
 select e.empno, e.ename, e.job, e.hiredate, d.deptno, d.dname
-from emp e -- Å×ÀÌºí¿¡ ´ëÇÑ º°Äª ºÎ¿© : emp -> e
+from emp e -- í…Œì´ë¸”ì— ëŒ€í•œ ë³„ì¹­ ë¶€ì—¬ : emp -> e
 inner join dept d -- dept -> d
-on e.deptno = d.deptno; -- on : join¿¡ ´ëÇÑ where
+on e.deptno = d.deptno; -- on : joinì— ëŒ€í•œ where
 
--- SALES ºÎ¼­¿¡ ±Ù¹«ÇÏ´Â Á÷¿ø Á¶È¸
+-- SALES ë¶€ì„œì— ê·¼ë¬´í•˜ëŠ” ì§ì› ì¡°íšŒ
 select e.*
 from emp e, dept d
 where d.dname = 'SALES' and e.deptno = d.deptno;
@@ -39,7 +39,7 @@ inner join dept d
 on e.deptno = d.deptno
 where d.dname = 'SALES';
 
--- °¢ ºÎ¼­º°·Î Á÷¿ø ¸ñ·Ï Á¶È¸ (group by X - outer join)
+-- ê° ë¶€ì„œë³„ë¡œ ì§ì› ëª©ë¡ ì¡°íšŒ (group by X - outer join)
 select * from dept;
 select d.dname, e.*
 from dept d, emp e
@@ -48,12 +48,12 @@ where d.deptno = e.deptno(+) -- left outer join
 order by d.deptno;
 
 select d.dname, e.*
-from dept d             -- deptÀÇ ¸ğµç Çà Á¶È¸
-left outer join emp e   -- empÀÇ deptno°¡ dept¿¡ Á¸ÀçÇÏ´Â Çà Á¶È¸
+from dept d             -- deptì˜ ëª¨ë“  í–‰ ì¡°íšŒ
+left outer join emp e   -- empì˜ deptnoê°€ deptì— ì¡´ì¬í•˜ëŠ” í–‰ ì¡°íšŒ
 on d.deptno = e.deptno
 order by d.deptno;
 
--- Á÷¿øÁ¤º¸¿Í ±Ş¿©µî±Ş Á¶È¸ (join)
+-- ì§ì›ì •ë³´ì™€ ê¸‰ì—¬ë“±ê¸‰ ì¡°íšŒ (join)
 select * from salgrade;
 select e.*, s.*
 from emp e, salgrade s
@@ -66,7 +66,7 @@ inner join salgrade s
 on e.sal between s.losal and s.hisal
 order by e.empno;
 
--- emp Å×ÀÌºí¿¡¼­ empno, ename, job, mgr, mgrÀÇ ÀÌ¸§
+-- emp í…Œì´ë¸”ì—ì„œ empno, ename, job, mgr, mgrì˜ ì´ë¦„
 select e1.empno, e1.ename, e1.job, e1.mgr, e2.ename mgrname
 from emp e1, emp e2
 where e1.mgr = e2.empno;

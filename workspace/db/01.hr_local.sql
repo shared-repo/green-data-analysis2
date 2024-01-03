@@ -1,4 +1,4 @@
--- Å×ÀÌºí ¸ñ·Ï Á¶È¸
+-- í…Œì´ë¸” ëª©ë¡ ì¡°íšŒ
 SELECT * FROM tab;
 
 SELECT * FROM employees;

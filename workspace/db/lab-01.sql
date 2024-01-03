@@ -1,65 +1,65 @@
--- Å×ÀÌºí ¸ñ·Ï È®ÀÎ
+-- í…Œì´ë¸” ëª©ë¡ í™•ì¸
 SELECT table_name from user_tables;
 
--- °¢ Å×ÀÌºí ±¸Á¶ È®ÀÎ
+-- ê° í…Œì´ë¸” êµ¬ì¡° í™•ì¸
 desc book;
 
--- µ¥ÀÌÅÍ È®ÀÎ
+-- ë°ì´í„° í™•ì¸
 select * from book;
 
--- 1. ¸ðµç µµ¼­ÀÇ ÀÌ¸§°ú °¡°ÝÀ» °Ë»öÇÏ½Ã¿À.
+-- 1. ëª¨ë“  ë„ì„œì˜ ì´ë¦„ê³¼ ê°€ê²©ì„ ê²€ìƒ‰í•˜ì‹œì˜¤.
 desc book;
 select bookname, price from book;
 
--- 2. ¸ðµç µµ¼­ÀÇ µµ¼­¹øÈ£, µµ¼­ÀÌ¸§, ÃâÆÇ»ç, °¡°ÝÀ» °Ë»öÇÏ½Ã¿À.
+-- 2. ëª¨ë“  ë„ì„œì˜ ë„ì„œë²ˆí˜¸, ë„ì„œì´ë¦„, ì¶œíŒì‚¬, ê°€ê²©ì„ ê²€ìƒ‰í•˜ì‹œì˜¤.
 -- select *
 select bookid, bookname, publisher, price
 from book;
 
--- 3. µµ¼­ Å×ÀÌºí¿¡ ÀÖ´Â ¸ðµç ÃâÆÇ»ç¸¦ °Ë»öÇÏ½Ã¿À.
+-- 3. ë„ì„œ í…Œì´ë¸”ì— ìžˆëŠ” ëª¨ë“  ì¶œíŒì‚¬ë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤.
 select distinct publisher from book;
 
--- 4. °¡°ÝÀÌ 20,000¿ø ¹Ì¸¸ÀÎ µµ¼­¸¦ °Ë»öÇÏ½Ã¿À.
+-- 4. ê°€ê²©ì´ 20,000ì› ë¯¸ë§Œì¸ ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤.
 select * from book where price < 20000;
 
--- 5. °¡°ÝÀÌ 10,000¿ø ÀÌ»ó 20,000 ÀÌÇÏÀÎ µµ¼­¸¦ °Ë»öÇÏ½Ã¿À.
+-- 5. ê°€ê²©ì´ 10,000ì› ì´ìƒ 20,000 ì´í•˜ì¸ ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤.
 select * from book 
 -- where price <= 20000 and price >= 10000;
 where price between 10000 and 20000;
 
--- 6. ÃâÆÇ»ç°¡ ¡®±Â½ºÆ÷Ã÷¡¯ È¤Àº ¡®´ëÇÑ¹Ìµð¾î¡¯ ÀÎ µµ¼­¸¦ °Ë»öÇÏ½Ã¿À.
+-- 6. ì¶œíŒì‚¬ê°€ â€˜êµ¿ìŠ¤í¬ì¸ â€™ í˜¹ì€ â€˜ëŒ€í•œë¯¸ë””ì–´â€™ ì¸ ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤.
 select * 
 from book
--- where publisher = '±Â½ºÆ÷Ã÷' or publisher = '´ëÇÑ¹Ìµð¾î';
-where publisher in ('±Â½ºÆ÷Ã÷', '´ëÇÑ¹Ìµð¾î');
+-- where publisher = 'êµ¿ìŠ¤í¬ì¸ ' or publisher = 'ëŒ€í•œë¯¸ë””ì–´';
+where publisher in ('êµ¿ìŠ¤í¬ì¸ ', 'ëŒ€í•œë¯¸ë””ì–´');
 
--- 7. ¡®Ãà±¸ÀÇ ¿ª»ç¡¯¸¦ Ãâ°£ÇÑ ÃâÆÇ»ç¸¦ °Ë»öÇÏ½Ã¿À.
+-- 7. â€˜ì¶•êµ¬ì˜ ì—­ì‚¬â€™ë¥¼ ì¶œê°„í•œ ì¶œíŒì‚¬ë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤.
 select publisher
 from book
-where bookname = 'Ãà±¸ÀÇ ¿ª»ç';
+where bookname = 'ì¶•êµ¬ì˜ ì—­ì‚¬';
 
--- 8. µµ¼­ÀÌ¸§¿¡ ¡®Ãà±¸¡¯ °¡ Æ÷ÇÔµÈ ÃâÆÇ»ç¸¦ °Ë»öÇÏ½Ã¿À.
+-- 8. ë„ì„œì´ë¦„ì— â€˜ì¶•êµ¬â€™ ê°€ í¬í•¨ëœ ì¶œíŒì‚¬ë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤.
 select bookname, publisher
 from book
-where bookname like '%Ãà±¸%';
+where bookname like '%ì¶•êµ¬%';
 
--- 9. µµ¼­ÀÌ¸§ÀÇ ¿ÞÂÊ µÎ ¹øÂ° À§Ä¡¿¡ ¡®±¸¡¯¶ó´Â ¹®ÀÚ¿­À» °®´Â µµ¼­¸¦ °Ë»öÇÏ½Ã¿À.
+-- 9. ë„ì„œì´ë¦„ì˜ ì™¼ìª½ ë‘ ë²ˆì§¸ ìœ„ì¹˜ì— â€˜êµ¬â€™ë¼ëŠ” ë¬¸ìžì—´ì„ ê°–ëŠ” ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤.
 select *
 from book
-where bookname like '_±¸%';
+where bookname like '_êµ¬%';
 
--- 10. Ãà±¸¿¡ °üÇÑ µµ¼­ Áß °¡°ÝÀÌ 20,000¿ø ÀÌ»óÀÎ µµ¼­¸¦ °Ë»öÇÏ½Ã¿À.
+-- 10. ì¶•êµ¬ì— ê´€í•œ ë„ì„œ ì¤‘ ê°€ê²©ì´ 20,000ì› ì´ìƒì¸ ë„ì„œë¥¼ ê²€ìƒ‰í•˜ì‹œì˜¤.
 SELECT *
 FROM BOOK
-WHERE BOOKNAME LIKE '%Ãà±¸%' AND PRICE >= 20000;
+WHERE BOOKNAME LIKE '%ì¶•êµ¬%' AND PRICE >= 20000;
 
--- 11. µµ¼­¸¦ ÀÌ¸§¼øÀ¸·Î °Ë»öÇÏ½Ã¿À. 
+-- 11. ë„ì„œë¥¼ ì´ë¦„ìˆœìœ¼ë¡œ ê²€ìƒ‰í•˜ì‹œì˜¤. 
 select *
 from book
 order by bookname asc;
 
--- µµ¼­¸¦ °¡°Ý¼øÀ¸·Î °Ë»öÇÏ°í, °¡°ÝÀÌ °°À¸¸é ÀÌ¸§¼øÀ¸·Î °Ë»öÇÏ½Ã¿À.
--- 12. µµ¼­¸¦ °¡°ÝÀÇ ³»¸²Â÷¼øÀ¸·Î °Ë»öÇÏ½Ã¿À. ¸¸¾à °¡°ÝÀÌ °°´Ù¸é ÃâÆÇ»çÀÇ ¿À¸§Â÷¼øÀ¸·Î Ãâ·ÂÇÏ½Ã¿À.
+-- ë„ì„œë¥¼ ê°€ê²©ìˆœìœ¼ë¡œ ê²€ìƒ‰í•˜ê³ , ê°€ê²©ì´ ê°™ìœ¼ë©´ ì´ë¦„ìˆœìœ¼ë¡œ ê²€ìƒ‰í•˜ì‹œì˜¤.
+-- 12. ë„ì„œë¥¼ ê°€ê²©ì˜ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ê²€ìƒ‰í•˜ì‹œì˜¤. ë§Œì•½ ê°€ê²©ì´ ê°™ë‹¤ë©´ ì¶œíŒì‚¬ì˜ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì¶œë ¥í•˜ì‹œì˜¤.
 select *
 from book
 order by price desc, bookname asc;

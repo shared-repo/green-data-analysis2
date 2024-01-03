@@ -1,6 +1,6 @@
--- 'scott' Á÷¿øº¸´Ù ÀÌÀü¿¡ ÀÔ»çÇÑ »ç¿ø Á¶È¸
-select * from emp; -- scott Á÷¿øÀÇ ÀÔ»çÀÏÀÚ È®ÀÎ
-select * from emp where hiredate > '1987-07-13'; -- È®ÀÎµÈ ÀÔ»çÀÏÀÚ·Î Á¶È¸
+-- 'scott' ì§ì›ë³´ë‹¤ ì´ì „ì— ìž…ì‚¬í•œ ì‚¬ì› ì¡°íšŒ
+select * from emp; -- scott ì§ì›ì˜ ìž…ì‚¬ì¼ìž í™•ì¸
+select * from emp where hiredate > '1987-07-13'; -- í™•ì¸ëœ ìž…ì‚¬ì¼ìžë¡œ ì¡°íšŒ
 
 select * 
 from emp 
@@ -12,7 +12,7 @@ select e1.*
 from emp e1, emp e2
 where e2.ename = 'SCOTT' and e1.hiredate < e2.hiredate;
 
--- 20¹ø ºÎ¼­ Á÷¿øÁß ÀüÃ¼ Á÷¿øÀÇ Æò±Õ ±Þ¿©º¸´Ù ¸¹Àº ±Þ¿©¸¦ ¹Þ´Â Á÷¿ø Á¶È¸
+-- 20ë²ˆ ë¶€ì„œ ì§ì›ì¤‘ ì „ì²´ ì§ì›ì˜ í‰ê·  ê¸‰ì—¬ë³´ë‹¤ ë§Žì€ ê¸‰ì—¬ë¥¼ ë°›ëŠ” ì§ì› ì¡°íšŒ
 select e.*, d.*
 from emp e, dept d
 where e.deptno = d.deptno and
@@ -26,7 +26,7 @@ on e.deptno = d.deptno
 where e.deptno = 20 and e.sal > ( select avg(e2.sal)
                                   from emp e2 );
                                   
--- °¢ ºÎ¼­º° ÃÖ°í±Þ¿©¿Í µ¿ÀÏÇÑ ±Þ¿©¸¦ ¹Þ´Â Á÷¿ø Á¶È¸
+-- ê° ë¶€ì„œë³„ ìµœê³ ê¸‰ì—¬ì™€ ë™ì¼í•œ ê¸‰ì—¬ë¥¼ ë°›ëŠ” ì§ì› ì¡°íšŒ
 select max(sal)
 from emp
 group by deptno;
@@ -49,7 +49,7 @@ where sal = SOME ( select max(sal)
                    from emp
                    group by deptno );
                    
--- 30¹ø ºÎ¼­ÀÇ ÃÖ°í±Þ¿© Á÷¿øº¸´Ù ÀûÀº ±Þ¿©¸¦ ¹Þ´Â Á÷¿ø Á¶È¸
+-- 30ë²ˆ ë¶€ì„œì˜ ìµœê³ ê¸‰ì—¬ ì§ì›ë³´ë‹¤ ì ì€ ê¸‰ì—¬ë¥¼ ë°›ëŠ” ì§ì› ì¡°íšŒ
 SELECT SAL FROM EMP WHERE DEPTNO = 30;
 
 select *
@@ -64,7 +64,7 @@ where sal < ANY( select sal
                  from emp
                  where deptno = 30 );
                  
--- 30¹ø ºÎ¼­ÀÇ ÃÖÀú±Þ¿© Á÷¿øº¸´Ù ÀûÀº ±Þ¿©¸¦ ¹Þ´Â Á÷¿ø Á¶È¸
+-- 30ë²ˆ ë¶€ì„œì˜ ìµœì €ê¸‰ì—¬ ì§ì›ë³´ë‹¤ ì ì€ ê¸‰ì—¬ë¥¼ ë°›ëŠ” ì§ì› ì¡°íšŒ
 select *
 from emp
 where sal < ( select min(sal)
@@ -85,7 +85,7 @@ from emp
 -- where ename in ( select ename from emp where deptno = 10 )
 where exists ( select ename from emp where deptno = 40 );
 
--- ºÎ¼­º° ÃÖ°í ±Þ¿©ÀÚ Á¶È¸
+-- ë¶€ì„œë³„ ìµœê³  ê¸‰ì—¬ìž ì¡°íšŒ
 select *
 from emp
 -- where sal IN ( select max(sal) from emp group by deptno );
@@ -93,7 +93,7 @@ where (deptno, sal) IN ( select deptno, max(sal)
                          from emp
                          group by deptno );
                          
--- 10¹ø ºÎ¼­ Á÷¿øÀÇ °³ÀÎ Á¤º¸¿Í ºÎ¼­ Á¤º¸ Á¶È¸ ( emp, dept join )
+-- 10ë²ˆ ë¶€ì„œ ì§ì›ì˜ ê°œì¸ ì •ë³´ì™€ ë¶€ì„œ ì •ë³´ ì¡°íšŒ ( emp, dept join )
 select e.*, d.*
 from emp e , dept d
 where e.deptno = 10 and e.deptno = d.deptno;
@@ -116,16 +116,16 @@ select *
 from e10, d
 where e10.deptno = d.deptno;
 
--- ÃÖ°í±Þ¿©, ÃÖÀú±Þ¿© Á¶È¸
-select max(sal) ÃÖ°í±Þ¿©, min(sal) ÃÖÀú±Þ¿©
+-- ìµœê³ ê¸‰ì—¬, ìµœì €ê¸‰ì—¬ ì¡°íšŒ
+select max(sal) ìµœê³ ê¸‰ì—¬, min(sal) ìµœì €ê¸‰ì—¬
 from emp;
 
 select 
-    ( select max(sal) from emp ) ÃÖ°í±Þ¿©,
-    ( select min(sal) from emp ) ÃÖÀú±Þ¿©
-from dual; -- dual : ÀÓ½ÃÅ×ÀÌºí (Å×ÀÌºíÀÌ ¾ø´Â ´Ü¼ø selectÀÎ °æ¿ì »ç¿ë )
+    ( select max(sal) from emp ) ìµœê³ ê¸‰ì—¬,
+    ( select min(sal) from emp ) ìµœì €ê¸‰ì—¬
+from dual; -- dual : ìž„ì‹œí…Œì´ë¸” (í…Œì´ë¸”ì´ ì—†ëŠ” ë‹¨ìˆœ selectì¸ ê²½ìš° ì‚¬ìš© )
 
--- Á÷¿øÁ¤º¸Á¶È¸ : »ç¹ø, ÀÌ¸§, ÀÔ»çÀÏÀÚ, ±Þ¿©, ÃÖ°í±Þ¿©´ëºñ ¼öÁØ (ºñÀ²)
+-- ì§ì›ì •ë³´ì¡°íšŒ : ì‚¬ë²ˆ, ì´ë¦„, ìž…ì‚¬ì¼ìž, ê¸‰ì—¬, ìµœê³ ê¸‰ì—¬ëŒ€ë¹„ ìˆ˜ì¤€ (ë¹„ìœ¨)
 select empno, ename, hiredate, sal, sal/(select max(sal) from emp) ratio
 from emp
 order by ratio desc;

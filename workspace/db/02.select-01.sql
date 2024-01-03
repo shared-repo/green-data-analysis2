@@ -1,183 +1,183 @@
--- Å×ÀÌºí ¸ñ·Ï º¸±â
-select * from tab; -- ¸ğµç Å×ÀÌºí Ç¥½Ã
+-- í…Œì´ë¸” ëª©ë¡ ë³´ê¸°
+select * from tab; -- ëª¨ë“  í…Œì´ë¸” í‘œì‹œ
 select table_name from user_tables;
 
--- Å×ÀÌºí ±¸Á¶ Á¤º¸ (ÄÃ·³ Á¤º¸)
+-- í…Œì´ë¸” êµ¬ì¡° ì •ë³´ (ì»¬ëŸ¼ ì •ë³´)
 desc emp;
 desc dept;
 
--- Å×ÀÌºí ³»¿ë Á¶È¸
+-- í…Œì´ë¸” ë‚´ìš© ì¡°íšŒ
 select * from emp;
 select * from dept;
 
--- emp Å×ÀÌºíÀÇ ¸ğµç ÄÃ·³ µ¥ÀÌÅÍ Á¶È¸
+-- emp í…Œì´ë¸”ì˜ ëª¨ë“  ì»¬ëŸ¼ ë°ì´í„° ì¡°íšŒ
 select empno, ename, job, mgr, hiredate, sal, comm, deptno
 from emp;
 
-select * -- * : ¸ğµç ÄÃ·³
+select * -- * : ëª¨ë“  ì»¬ëŸ¼
 from emp;
 
--- emp Å×ÀÌºí¿¡¼­ empno, ename, job, hiredate, sal ÄÃ·³ µ¥ÀÌÅÍ Á¶È¸
+-- emp í…Œì´ë¸”ì—ì„œ empno, ename, job, hiredate, sal ì»¬ëŸ¼ ë°ì´í„° ì¡°íšŒ
 select empno, ename, job, hiredate, sal
 from emp;
 
--- emp Å×ÀÌºí¿¡¼­ ºÎ¼­ Á¤º¸ Á¶È¸ ( ¾î¶² ºÎ¼­°¡ ÀÖ´ÂÁö ¾Ë°í ½Í¾î¼­ )
-select deptno from emp; -- ¸ğµç Çà Á¶È¸
-select distinct deptno from emp; -- Áßº¹ Á¦°Å Á¶È¸
+-- emp í…Œì´ë¸”ì—ì„œ ë¶€ì„œ ì •ë³´ ì¡°íšŒ ( ì–´ë–¤ ë¶€ì„œê°€ ìˆëŠ”ì§€ ì•Œê³  ì‹¶ì–´ì„œ )
+select deptno from emp; -- ëª¨ë“  í–‰ ì¡°íšŒ
+select distinct deptno from emp; -- ì¤‘ë³µ ì œê±° ì¡°íšŒ
 
--- emp Å×ÀÌºí¿¡¼­ ºÎ¼­, ¾÷¹« Á¤º¸ Á¶È¸ ( ¾î¶² ºÎ¼­¿Í ¾÷¹«°¡ ÀÖ´ÂÁö ¾Ë°í ½Í¾î¼­ )
+-- emp í…Œì´ë¸”ì—ì„œ ë¶€ì„œ, ì—…ë¬´ ì •ë³´ ì¡°íšŒ ( ì–´ë–¤ ë¶€ì„œì™€ ì—…ë¬´ê°€ ìˆëŠ”ì§€ ì•Œê³  ì‹¶ì–´ì„œ )
 select /* all */ deptno, job from emp;
 select distinct deptno, job from emp;
 
--- Á÷¿øº° annual salary (sal * 12 + comm) Á¶È¸
+-- ì§ì›ë³„ annual salary (sal * 12 + comm) ì¡°íšŒ
 select * from emp;
-select comm, nvl(comm, 0) from emp; -- nvl : null -> Æ¯Á¤ °ªÀ¸·Î º¯°æ
-select empno, ename, sal*12+nvl(comm, 0) as annsal from emp; -- º°Äª(alias) ÁöÁ¤
+select comm, nvl(comm, 0) from emp; -- nvl : null -> íŠ¹ì • ê°’ìœ¼ë¡œ ë³€ê²½
+select empno, ename, sal*12+nvl(comm, 0) as annsal from emp; -- ë³„ì¹­(alias) ì§€ì •
 select empno, ename, sal*12+nvl(comm, 0) annsal from emp;
 
--- Á÷¿øº° annual salary (sal * 12 + comm) ³ôÀºÁ÷¿ø-> ³·ÀºÁ÷¿ø¼øÀ¸·Î Á¶È¸
+-- ì§ì›ë³„ annual salary (sal * 12 + comm) ë†’ì€ì§ì›-> ë‚®ì€ì§ì›ìˆœìœ¼ë¡œ ì¡°íšŒ
 select empno, ename, sal*12+nvl(comm, 0) annsal 
 from emp
-order by annsal desc; -- asc :¿À¸§Â÷¼ø, desc: ³»¸²Â÷¼ø
+order by annsal desc; -- asc :ì˜¤ë¦„ì°¨ìˆœ, desc: ë‚´ë¦¼ì°¨ìˆœ
 
--- ÀÔ»çÀÏÀÚ°¡ ºü¸¥ ¼øÀ¸·Î Á÷¿ø Á¶È¸
+-- ì…ì‚¬ì¼ìê°€ ë¹ ë¥¸ ìˆœìœ¼ë¡œ ì§ì› ì¡°íšŒ
 select * from emp order by hiredate asc;
 
--- ¾÷¹«º°, ±Ş¿©¼øÀ¸·Î Á÷¿ø Á¶È¸
-select * from emp order by job asc, sal desc; -- 2°³ ÄÃ·³ ±âÁØ Á¤·Ä (1Â÷Á¤·Ä, 2Â÷Á¤·Ä)
+-- ì—…ë¬´ë³„, ê¸‰ì—¬ìˆœìœ¼ë¡œ ì§ì› ì¡°íšŒ
+select * from emp order by job asc, sal desc; -- 2ê°œ ì»¬ëŸ¼ ê¸°ì¤€ ì •ë ¬ (1ì°¨ì •ë ¬, 2ì°¨ì •ë ¬)
 
 -- *************************
 
--- ¸ğµç Á÷¿ø Á¶È¸
+-- ëª¨ë“  ì§ì› ì¡°íšŒ
 select * from emp;
 
--- ºÎ¼­¹øÈ£°¡ 30ÀÎ Á÷¿ø Á¶È¸
+-- ë¶€ì„œë²ˆí˜¸ê°€ 30ì¸ ì§ì› ì¡°íšŒ
 select * from emp where deptno = 30;
 
--- ºÎ¼­¹øÈ£°¡ 30ÀÎ ºÎ¼­ÀÌ¸§ Á¶È¸
+-- ë¶€ì„œë²ˆí˜¸ê°€ 30ì¸ ë¶€ì„œì´ë¦„ ì¡°íšŒ
 desc dept;
 select * from dept where deptno = 30;
 
--- »ç¿ø¹øÈ£°¡ 7782ÀÎ Á÷¿ø Á¶È¸
+-- ì‚¬ì›ë²ˆí˜¸ê°€ 7782ì¸ ì§ì› ì¡°íšŒ
 desc emp;
 select * from emp where empno = 7782;
 
--- ºÎ¼­¹øÈ£°¡ 30ÀÌ°í ´ã´ç¾÷¹«°¡ SALESMAN Á÷¿ø Á¶È¸
+-- ë¶€ì„œë²ˆí˜¸ê°€ 30ì´ê³  ë‹´ë‹¹ì—…ë¬´ê°€ SALESMAN ì§ì› ì¡°íšŒ
 select * 
 from emp
-where deptno = 30 and job = 'SALESMAN'; -- ¹®ÀÚ¿­°ú ³¯Â¥´Â ÀÛÀºµû¿ÈÇ¥·Î Ç¥½Ã
+where deptno = 30 and job = 'SALESMAN'; -- ë¬¸ìì—´ê³¼ ë‚ ì§œëŠ” ì‘ì€ë”°ì˜´í‘œë¡œ í‘œì‹œ
 
--- ´ã´ç¾÷¹«°¡ SALESMAN ÀÌ¸é¼­ ±Ş¿©°¡ 1500ÀÌ»óÀÎ Á÷¿ø Á¶È¸
+-- ë‹´ë‹¹ì—…ë¬´ê°€ SALESMAN ì´ë©´ì„œ ê¸‰ì—¬ê°€ 1500ì´ìƒì¸ ì§ì› ì¡°íšŒ
 select *
 from emp
 where job = 'SALESMAN' and sal >= 1500;
 
--- »ç¹øÀÌ 7499ÀÌ¸é¼­ 30¹ø ºÎ¼­ ¼Ò¼ÓÀÎ Á÷¿ø
+-- ì‚¬ë²ˆì´ 7499ì´ë©´ì„œ 30ë²ˆ ë¶€ì„œ ì†Œì†ì¸ ì§ì›
 select *
 from emp
 where empno = 7499 and deptno = 30;
 
--- ¿¬ºÀÀÌ 20000ÀÌ»óÀÎ Á÷¿ø Á¶È¸
+-- ì—°ë´‰ì´ 20000ì´ìƒì¸ ì§ì› ì¡°íšŒ
 select *
 from emp
 where sal * 12 >= 20000;
 
--- ±Ş¿©°¡ 3000ÀÎ Á÷¿ø
+-- ê¸‰ì—¬ê°€ 3000ì¸ ì§ì›
 select *
 from emp
 where sal = 3000;
 
--- ±Ş¿©°¡ 3000ÀÌ ¾Æ´Ñ Á÷¿ø
+-- ê¸‰ì—¬ê°€ 3000ì´ ì•„ë‹Œ ì§ì›
 select *
 from emp
 -- where sal != 3000;
 -- where sal <> 3000;
 where not (sal = 3000);
 
--- ÀÔ»ç³âµµ°¡ 87³âÀÎ Á÷¿ø Á¶È¸
+-- ì…ì‚¬ë…„ë„ê°€ 87ë…„ì¸ ì§ì› ì¡°íšŒ
 desc emp;
 -- select * from emp;
 select *
 from emp
 where hiredate >= '1987-01-01';
 
--- Á÷¹«°¡ salesman ¶Ç´Â manager ¶Ç´Â analystÀÎ Á÷¿ø Á¶È¸
+-- ì§ë¬´ê°€ salesman ë˜ëŠ” manager ë˜ëŠ” analystì¸ ì§ì› ì¡°íšŒ
 select distinct job from emp;
 select *
 from emp
 -- where job = 'SALESMAN' or job = 'MANAGER' or job = 'ANALYST';
 where job in ('SALESMAN', 'MANAGER', 'ANALYST');
 
--- Á÷¹«°¡ salesman, manager, analyst°¡ ¾Æ´Ñ Á÷¿ø Á¶È¸
+-- ì§ë¬´ê°€ salesman, manager, analystê°€ ì•„ë‹Œ ì§ì› ì¡°íšŒ
 select * 
 from emp
 -- where job != 'SALESMAN' and job != 'MANAGER' and job != 'ANALYST';
 where job not in ('SALESMAN', 'MANAGER', 'ANALYST');
 
--- accounting ºÎ¼­ ¶Ç´Â research ºÎ¼­ Á÷¿ø Á¶È¸
+-- accounting ë¶€ì„œ ë˜ëŠ” research ë¶€ì„œ ì§ì› ì¡°íšŒ
 select * from dept; -- accounting : 10, research : 20
 select *
 from emp
 -- where deptno = 10 or deptno = 20;
 where deptno in (10, 20);
 
--- ±Ş¿©°¡ 2000ÀÌ»ó 3000ÀÌÇÏ Á÷¿ø Á¶È¸
+-- ê¸‰ì—¬ê°€ 2000ì´ìƒ 3000ì´í•˜ ì§ì› ì¡°íšŒ
 select *
 from emp
 -- where sal >= 2000 and sal <= 3000; 
 where sal between 2000 and 3000;
 
--- ±Ş¿©°¡ 2000º¸´Ù ÀÛ°Å³ª 3000º¸´Ù Å« Á÷¿ø Á¶È¸
+-- ê¸‰ì—¬ê°€ 2000ë³´ë‹¤ ì‘ê±°ë‚˜ 3000ë³´ë‹¤ í° ì§ì› ì¡°íšŒ
 select *
 from emp
 -- where sal < 2000 or sal > 3000; 
 where sal not between 2000 and 3000;
 
--- »ç¿ø ÀÌ¸§¿¡ AMÀÌ Æ÷ÇÔµÈ Á÷¿ø
+-- ì‚¬ì› ì´ë¦„ì— AMì´ í¬í•¨ëœ ì§ì›
 select *
 from emp
 where ename LIKE '%AM%';
 
--- »ç¿ø ÀÌ¸§¿¡ AMÀÌ Æ÷ÇÔµÇÁö ¾ÊÀº Á÷¿ø
+-- ì‚¬ì› ì´ë¦„ì— AMì´ í¬í•¨ë˜ì§€ ì•Šì€ ì§ì›
 select *
 from emp
 where ename not LIKE '%AM%';
 
--- »ç¿øÀÌ¸§ÀÌ A·Î ½ÃÀÛÇÏ´Â Á÷¿ø
+-- ì‚¬ì›ì´ë¦„ì´ Aë¡œ ì‹œì‘í•˜ëŠ” ì§ì›
 select *
 from emp
 where ename LIKE 'A%';
 
--- »ç¿øÀÌ¸§ÀÇ µÎ ¹øÂ° ¹®ÀÚ°¡ AÀÎ Á÷¿ø
+-- ì‚¬ì›ì´ë¦„ì˜ ë‘ ë²ˆì§¸ ë¬¸ìê°€ Aì¸ ì§ì›
 select *
 from emp
-where ename LIKE '_A%'; -- % : n°³(0°³ Æ÷ÇÔ), _ : 1°³
+where ename LIKE '_A%'; -- % : nê°œ(0ê°œ í¬í•¨), _ : 1ê°œ
 
--- commisionÀ» ¹ŞÁö ¾Ê´Â Á¶È¸
+-- commisionì„ ë°›ì§€ ì•ŠëŠ” ì¡°íšŒ
 select * 
 from emp
 -- where comm = NULL;
-where comm is NULL; -- NULLÀ» ºñ±³ÇÒ ¶§´Â ¹İµå½Ã IS NULL ¶Ç´Â IS NOT NULL »ç¿ë
+where comm is NULL; -- NULLì„ ë¹„êµí•  ë•ŒëŠ” ë°˜ë“œì‹œ IS NULL ë˜ëŠ” IS NOT NULL ì‚¬ìš©
 
--- commisionÀ» ¹Ş´Â Á÷¿ø Á¶È¸
+-- commisionì„ ë°›ëŠ” ì§ì› ì¡°íšŒ
 select * 
 from emp
 -- where comm != NULL;
 where comm is NOT null;
 
--- ºÎ¼­ÄÚµå°¡ 10 ¶Ç´Â 20ÀÎ Á÷¿ø Á¶È¸
+-- ë¶€ì„œì½”ë“œê°€ 10 ë˜ëŠ” 20ì¸ ì§ì› ì¡°íšŒ
 select * from emp where deptno in (10, 20);
 select * from emp where deptno = 10
 union
 select * from emp where deptno = 20;
 
--- ºÎ¼­ÄÚµå°¡ 30ÀÌ ¾Æ´Ñ Á÷¿ø
+-- ë¶€ì„œì½”ë“œê°€ 30ì´ ì•„ë‹Œ ì§ì›
 select * from emp where deptno != 30;
 select * from emp
 minus
 select * from emp where deptno = 30;
 
--- ºÎ¼­ÄÚµå°¡ 20ÀÎ Á÷¿ø
+-- ë¶€ì„œì½”ë“œê°€ 20ì¸ ì§ì›
 select * from emp where deptno = 20;
 select * from emp where deptno in (10, 20)
 intersect

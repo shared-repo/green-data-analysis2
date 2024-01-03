@@ -1,87 +1,87 @@
--- kdtda °èÁ¤À¸·Î ½ÇÇà
+-- kdtda ê³„ì •ìœ¼ë¡œ ì‹¤í–‰
 
--- °í°´ÀÌ ÁÖ¹®ÇÑ µµ¼­ÀÇ ÃÑ ÆÇ¸Å¾×, Æò±Õ°ª, ÃÖÀú°¡, ÃÖ°í°¡
+-- ê³ ê°ì´ ì£¼ë¬¸í•œ ë„ì„œì˜ ì´ íŒë§¤ì•¡, í‰ê· ê°’, ìµœì €ê°€, ìµœê³ ê°€
 select 
-    sum(saleprice) "ÃÑ ÆÇ¸Å¾×", 
-    avg(saleprice) "Æò±Õ°ª", 
-    min(saleprice) "ÃÖÀú°¡", 
-    max(saleprice) "ÃÖ°í°¡"
+    sum(saleprice) "ì´ íŒë§¤ì•¡", 
+    avg(saleprice) "í‰ê· ê°’", 
+    min(saleprice) "ìµœì €ê°€", 
+    max(saleprice) "ìµœê³ ê°€"
 from orders;
 
--- °í°´º°·Î ÁÖ¹®ÇÑ µµ¼­ÀÇ ÃÑ ¼ö·®°ú ÃÑ ÆÇ¸Å¾×À» ±¸ÇÏ½Ã¿À
+-- ê³ ê°ë³„ë¡œ ì£¼ë¬¸í•œ ë„ì„œì˜ ì´ ìˆ˜ëŸ‰ê³¼ ì´ íŒë§¤ì•¡ì„ êµ¬í•˜ì‹œì˜¤
 select 
     custid,
-    count(saleprice) "ÃÑ ¼ö·®",
-    sum(saleprice) "ÃÑ ÆÇ¸Å¾×"
+    count(saleprice) "ì´ ìˆ˜ëŸ‰",
+    sum(saleprice) "ì´ íŒë§¤ì•¡"
 from orders
 group by custid
-order by "ÃÑ ÆÇ¸Å¾×" desc;
+order by "ì´ íŒë§¤ì•¡" desc;
 
--- °¡°İÀÌ 8,000¿ø ÀÌ»óÀÎ µµ¼­¸¦ ±¸¸ÅÇÑ °í°´¿¡ ´ëÇÏ¿© °í°´º° ÁÖ¹® µµ¼­ÀÇ ÃÑ ¼ö·®À» ±¸ÇÏ½Ã¿À.  
--- ´Ü, µÎ ±Ç ÀÌ»ó ±¸¸ÅÇÑ °í°´¸¸ ±¸ÇÑ´Ù
+-- ê°€ê²©ì´ 8,000ì› ì´ìƒì¸ ë„ì„œë¥¼ êµ¬ë§¤í•œ ê³ ê°ì— ëŒ€í•˜ì—¬ ê³ ê°ë³„ ì£¼ë¬¸ ë„ì„œì˜ ì´ ìˆ˜ëŸ‰ì„ êµ¬í•˜ì‹œì˜¤.  
+-- ë‹¨, ë‘ ê¶Œ ì´ìƒ êµ¬ë§¤í•œ ê³ ê°ë§Œ êµ¬í•œë‹¤
 select 
     custid,
-    count(saleprice) "ÃÑ ¼ö·®",
-    sum(saleprice) "ÃÑ ÆÇ¸Å¾×"
+    count(saleprice) "ì´ ìˆ˜ëŸ‰",
+    sum(saleprice) "ì´ íŒë§¤ì•¡"
 from orders
 where saleprice >= 8000
 group by custid
 having count(saleprice) >= 2
-order by "ÃÑ ÆÇ¸Å¾×" desc;
+order by "ì´ íŒë§¤ì•¡" desc;
 
--- ¹ÚÁö¼º °í°´ÀÇ ÃÑ ±¸¸Å¾×
--- ¹ÚÁö¼º °í°´ÀÌ ±¸¸ÅÇÑ µµ¼­ÀÇ ¼ö
-select * from orders; -- °í°´¸íÀ» ±¸ºĞÇÒ ¼ö ¾øÀ½
-select * from customer; -- ¹ÚÁö¼º°í°´ÀÇ custid°¡ 1ÀÓÀ» È®ÀÎ
-select '¹ÚÁö¼º' °í°´, sum(saleprice) "ÃÑ ±¸¸Å¾×", count(saleprice) ¼ö·®
+-- ë°•ì§€ì„± ê³ ê°ì˜ ì´ êµ¬ë§¤ì•¡
+-- ë°•ì§€ì„± ê³ ê°ì´ êµ¬ë§¤í•œ ë„ì„œì˜ ìˆ˜
+select * from orders; -- ê³ ê°ëª…ì„ êµ¬ë¶„í•  ìˆ˜ ì—†ìŒ
+select * from customer; -- ë°•ì§€ì„±ê³ ê°ì˜ custidê°€ 1ì„ì„ í™•ì¸
+select 'ë°•ì§€ì„±' ê³ ê°, sum(saleprice) "ì´ êµ¬ë§¤ì•¡", count(saleprice) ìˆ˜ëŸ‰
 from orders
 where custid = 1;
 
--- µµ¼­ÀÇ ÃÑ °³¼ö
-select count(*) "µµ¼­ ÃÑ¼ö·®"
+-- ë„ì„œì˜ ì´ ê°œìˆ˜
+select count(*) "ë„ì„œ ì´ìˆ˜ëŸ‰"
 from book;
 
--- µµ¼­¸¦ Ãâ°íÇÏ´Â ÃâÆÇ»çÀÇ ÃÑ °³¼ö
-select publisher from book; -- ÃâÆÇ»ç´Â Áßº¹µÈ µ¥ÀÌÅÍ¸¦ Æ÷ÇÔ
-select count(distinct publisher) "ÃâÆÇ»ç ¼ö"
+-- ë„ì„œë¥¼ ì¶œê³ í•˜ëŠ” ì¶œíŒì‚¬ì˜ ì´ ê°œìˆ˜
+select publisher from book; -- ì¶œíŒì‚¬ëŠ” ì¤‘ë³µëœ ë°ì´í„°ë¥¼ í¬í•¨
+select count(distinct publisher) "ì¶œíŒì‚¬ ìˆ˜"
 from book;
 
--- hr °èÁ¤À¸·Î ½ÇÇà
+-- hr ê³„ì •ìœ¼ë¡œ ì‹¤í–‰
 
--- ¸ğµç »ç¿øÀº Á÷¼Ó »ó»ç ¹× Á÷¼Ó Á÷¿øÀ» °®´Â´Ù. 
--- ´Ü, ÃÖ»óÀ§ Á÷¿øÀº Á÷¼Ó»ó»ç°¡ ¾ø°í ÃÖÇÏÀ§ Á÷¿øÀº °ü¸®ÇÏ´Â Á÷¿øÀÌ ¾ø´Ù. 
--- ¼Ò¼ÓµÈ »ç¿øµé Áß ¾î¶² »ç¿øÀÇ »ó»ç·Î ±Ù¹« ÁßÀÎ »ç¿øÀÇ ÃÑ ¼ö¸¦ Ãâ·ÂÇÏ½Ã¿À
+-- ëª¨ë“  ì‚¬ì›ì€ ì§ì† ìƒì‚¬ ë° ì§ì† ì§ì›ì„ ê°–ëŠ”ë‹¤. 
+-- ë‹¨, ìµœìƒìœ„ ì§ì›ì€ ì§ì†ìƒì‚¬ê°€ ì—†ê³  ìµœí•˜ìœ„ ì§ì›ì€ ê´€ë¦¬í•˜ëŠ” ì§ì›ì´ ì—†ë‹¤. 
+-- ì†Œì†ëœ ì‚¬ì›ë“¤ ì¤‘ ì–´ë–¤ ì‚¬ì›ì˜ ìƒì‚¬ë¡œ ê·¼ë¬´ ì¤‘ì¸ ì‚¬ì›ì˜ ì´ ìˆ˜ë¥¼ ì¶œë ¥í•˜ì‹œì˜¤
 select distinct manager_id from employees;
-select count(distinct manager_id) "°ü¸®Á÷¿ø ¼ö"
+select count(distinct manager_id) "ê´€ë¦¬ì§ì› ìˆ˜"
 from employees
-where manager_id is not null; -- »ı·« °¡´É (Áı°èÇÔ¼ö´Â null Á¦¿ÜÇÏ°í ¼öÇà)
+where manager_id is not null; -- ìƒëµ ê°€ëŠ¥ (ì§‘ê³„í•¨ìˆ˜ëŠ” null ì œì™¸í•˜ê³  ìˆ˜í–‰)
 
--- °¢ »ç¿øÀÌ ¼Ò¼ÓµÈ ºÎ¼­º°·Î ±Ş¿© ÇÕ°è, ±Ş¿© Æò±Õ, ±Ş¿© ÃÖ´ñ°ª, ±Ş¿© ÃÖ¼Ú°ªÀ» Áı°èÇÏ°íÀÚ ÇÑ´Ù. 
--- ´Ü, ºÎ¼­¿¡ ¼Ò¼ÓµÇÁö ¾ÊÀº »ç¿ø¿¡ ´ëÇÑ Á¤º¸´Â Á¦¿Ü
+-- ê° ì‚¬ì›ì´ ì†Œì†ëœ ë¶€ì„œë³„ë¡œ ê¸‰ì—¬ í•©ê³„, ê¸‰ì—¬ í‰ê· , ê¸‰ì—¬ ìµœëŒ“ê°’, ê¸‰ì—¬ ìµœì†Ÿê°’ì„ ì§‘ê³„í•˜ê³ ì í•œë‹¤. 
+-- ë‹¨, ë¶€ì„œì— ì†Œì†ë˜ì§€ ì•Šì€ ì‚¬ì›ì— ëŒ€í•œ ì •ë³´ëŠ” ì œì™¸
 select * from employees;
 select department_id, 
-        round(sum(salary), 2) ±Ş¿©ÃÑ¾×, 
-        round(avg(salary), 2) ±Ş¿©Æò±Õ, 
-        round(min(salary), 2) ÃÖ¼Ò±Ş¿©, 
-        round(max(salary), 2) ÃÖ´ë±Ş¿©
+        round(sum(salary), 2) ê¸‰ì—¬ì´ì•¡, 
+        round(avg(salary), 2) ê¸‰ì—¬í‰ê· , 
+        round(min(salary), 2) ìµœì†Œê¸‰ì—¬, 
+        round(max(salary), 2) ìµœëŒ€ê¸‰ì—¬
 from employees
 where department_id is not null
 group by department_id
-order by ±Ş¿©Æò±Õ desc;
+order by ê¸‰ì—¬í‰ê·  desc;
 
 select * from departments;
 
--- »ç¿øµéÀÇ ¾÷¹«º° ÀüÃ¼ ±Ş¿© Æò±ÕÀÌ $10,000º¸´Ù Å« °æ¿ì¸¦ Á¶È¸ÇÏ¿© 
---  ¾÷¹«º° ±Ş¿© Æò±ÕÀ» Ãâ·ÂÇÏ½Ã¿À. 
--- ´Ü ¾÷¹«¿¡ »ç¿ø(CLERK)ÀÌ Æ÷ÇÔµÈ °æ¿ì´Â Á¦¿ÜÇÏ°í 
---ÀüÃ¼ ±Ş¿© Æò±ÕÀÌ ³ôÀº ¼ø¼­´ë·Î Ãâ·ÂÇÏ½Ã¿À
+-- ì‚¬ì›ë“¤ì˜ ì—…ë¬´ë³„ ì „ì²´ ê¸‰ì—¬ í‰ê· ì´ $10,000ë³´ë‹¤ í° ê²½ìš°ë¥¼ ì¡°íšŒí•˜ì—¬ 
+--  ì—…ë¬´ë³„ ê¸‰ì—¬ í‰ê· ì„ ì¶œë ¥í•˜ì‹œì˜¤. 
+-- ë‹¨ ì—…ë¬´ì— ì‚¬ì›(CLERK)ì´ í¬í•¨ëœ ê²½ìš°ëŠ” ì œì™¸í•˜ê³  
+--ì „ì²´ ê¸‰ì—¬ í‰ê· ì´ ë†’ì€ ìˆœì„œëŒ€ë¡œ ì¶œë ¥í•˜ì‹œì˜¤
 select * from employees;
-select job_id, avg(salary) ±Ş¿©Æò±Õ
+select job_id, avg(salary) ê¸‰ì—¬í‰ê· 
 from employees
 where job_id not like '%CLERK%'
 group by job_id
 having avg(salary) > 10000
-order by ±Ş¿©Æò±Õ desc;
+order by ê¸‰ì—¬í‰ê·  desc;
 
 
 

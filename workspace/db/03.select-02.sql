@@ -1,48 +1,48 @@
--- Á÷¿ø ±Þ¿© ÃÑ¾×
-select sum(sal) "±Þ¿©ÃÑ¾×"
+-- ì§ì› ê¸‰ì—¬ ì´ì•¡
+select sum(sal) "ê¸‰ì—¬ì´ì•¡"
 from emp;
 
--- ¼ö´ç ÃÑ¾×
-select sum(comm) "¼ö´çÃÑ¾×"
+-- ìˆ˜ë‹¹ ì´ì•¡
+select sum(comm) "ìˆ˜ë‹¹ì´ì•¡"
 from emp;
 
--- ±Þ¿©ÃÑ¾×, ¼ö´çÃÑ¾×, Áö±ÞÃÑ¾×
+-- ê¸‰ì—¬ì´ì•¡, ìˆ˜ë‹¹ì´ì•¡, ì§€ê¸‰ì´ì•¡
 select 
-    sum(sal) "±Þ¿©ÃÑ¾×", 
-    sum(comm) "¼ö´çÃÑ¾×", 
-    sum(sal) + sum(comm) "Áö±ÞÃÑ¾×"
+    sum(sal) "ê¸‰ì—¬ì´ì•¡", 
+    sum(comm) "ìˆ˜ë‹¹ì´ì•¡", 
+    sum(sal) + sum(comm) "ì§€ê¸‰ì´ì•¡"
 from emp;
 
--- Á÷¿ø¼ö Á¶È¸
-select count(*), count(distinct empno) "Á÷¿ø¼ö", count(comm) "Á÷¿ø¼ö2"
+-- ì§ì›ìˆ˜ ì¡°íšŒ
+select count(*), count(distinct empno) "ì§ì›ìˆ˜", count(comm) "ì§ì›ìˆ˜2"
 from emp;
 
--- ±Þ¿©Æò±Õ
+-- ê¸‰ì—¬í‰ê· 
 select 
-    -- sum(sal) / count(sal) "±Þ¿©Æò±Õ1",
-    round(sum(sal) / count(sal), 2) "±Þ¿©Æò±Õ2",
-    ceil(sum(sal) / count(sal)) "±Þ¿©Æò±Õ3", 
-    floor(sum(sal) / count(sal)) "±Þ¿©Æò±Õ4",
-    round(avg(sal), 2) "±Þ¿©Æò±Õ5"
+    -- sum(sal) / count(sal) "ê¸‰ì—¬í‰ê· 1",
+    round(sum(sal) / count(sal), 2) "ê¸‰ì—¬í‰ê· 2",
+    ceil(sum(sal) / count(sal)) "ê¸‰ì—¬í‰ê· 3", 
+    floor(sum(sal) / count(sal)) "ê¸‰ì—¬í‰ê· 4",
+    round(avg(sal), 2) "ê¸‰ì—¬í‰ê· 5"
 from emp;
 
--- ÃÖÀú ¹× ÃÖ°í ±Þ¿©
+-- ìµœì € ë° ìµœê³  ê¸‰ì—¬
 select 
-    min(sal) ÃÖÀú±Þ¿©,
-    max(sal) ÃÖ°í±Þ¿©
+    min(sal) ìµœì €ê¸‰ì—¬,
+    max(sal) ìµœê³ ê¸‰ì—¬
 from emp;
 
--- ÃÖÀú ¹× ÃÖ°í ±Þ¿© ¼ö·É Á÷¿ø
+-- ìµœì € ë° ìµœê³  ê¸‰ì—¬ ìˆ˜ë ¹ ì§ì›
 select *
 from emp
 -- where sal = min(sal) or sal = max(sal)
 where 
-    sal = (select min(sal) from emp) -- ºÎ¼Ó ÁúÀÇ ( subquery )
+    sal = (select min(sal) from emp) -- ë¶€ì† ì§ˆì˜ ( subquery )
     or 
     sal = (select max(sal) from emp)
 order by sal desc;
 
--- Á÷¹«º° ±Þ¿© ÃÑ¾×, ±Þ¿© Æò±Õ, ÃÖÀú±Þ¿©, ÃÖ°í±Þ¿© 1
+-- ì§ë¬´ë³„ ê¸‰ì—¬ ì´ì•¡, ê¸‰ì—¬ í‰ê· , ìµœì €ê¸‰ì—¬, ìµœê³ ê¸‰ì—¬ 1
 select distinct job from emp;
 select 'CLERK' JOB, sum(sal), round(avg(sal), 2), min(sal), max(sal) from emp where job = 'CLERK'
 UNION
@@ -54,22 +54,22 @@ select 'MANAGER' JOB, sum(sal), round(avg(sal), 2), min(sal), max(sal) from emp 
 UNION
 select 'ANALYSIT' JOB, sum(sal), round(avg(sal), 2), min(sal), max(sal) from emp where job = 'ANALYST';
 
--- Á÷¹«º° ±Þ¿© ÃÑ¾×, ±Þ¿© Æò±Õ, ÃÖÀú±Þ¿©, ÃÖ°í±Þ¿© 2
+-- ì§ë¬´ë³„ ê¸‰ì—¬ ì´ì•¡, ê¸‰ì—¬ í‰ê· , ìµœì €ê¸‰ì—¬, ìµœê³ ê¸‰ì—¬ 2
 select 
     job,
-    -- ename, -- ¿À·ù : group by ¿¡ Àû¿ëµÈ ÄÃ·³ÀÌ ¾Æ´Ï¸é select ¿¡ Æ÷ÇÔµÉ ¼ö ¾ø½À´Ï´Ù.
+    -- ename, -- ì˜¤ë¥˜ : group by ì— ì ìš©ëœ ì»¬ëŸ¼ì´ ì•„ë‹ˆë©´ select ì— í¬í•¨ë  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
     sum(sal), round(avg(sal), 2), min(sal), max(sal)
 from emp
 group by job;
 
--- Á÷¹«º° ±Þ¿© ÃÑ¾×, ±Þ¿© Æò±Õ, ÃÖÀú±Þ¿©, ÃÖ°í±Þ¿© Á¶È¸
--- ´Ü, jobÀÌ president´Â Á¦¿ÜÇÏ°í Æò±Õ±Þ¿©°¡ 2000 ÀÌ»óÀÎ °æ¿ì¸¸ Æ÷ÇÔ
+-- ì§ë¬´ë³„ ê¸‰ì—¬ ì´ì•¡, ê¸‰ì—¬ í‰ê· , ìµœì €ê¸‰ì—¬, ìµœê³ ê¸‰ì—¬ ì¡°íšŒ
+-- ë‹¨, jobì´ presidentëŠ” ì œì™¸í•˜ê³  í‰ê· ê¸‰ì—¬ê°€ 2000 ì´ìƒì¸ ê²½ìš°ë§Œ í¬í•¨
 select 
     job,
     sum(sal), round(avg(sal), 2), min(sal), max(sal)
 from emp
 where 
     job != 'PRESIDENT'
-    -- AND AVG(SAL) >= 2000 -- ¿À·ù : Áý°èÇÔ¼ö¸¦ WHEREÀý¿¡ »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.
+    -- AND AVG(SAL) >= 2000 -- ì˜¤ë¥˜ : ì§‘ê³„í•¨ìˆ˜ë¥¼ WHEREì ˆì— ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 group by job
 having avg(sal) >= 2000;
