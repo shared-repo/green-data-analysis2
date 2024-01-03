@@ -25,9 +25,23 @@ where c.custid = o.custid
 select distinct bookid from orders;
 
 -- 출판사별로 출판사의 평균 도서 가격보다 비싼 도서를 구하시오 ( 학습하지 않은 내용 )
+select *
+from book b
+where b.price > ( select avg(b2.price)
+                  from book b2 
+                  where b.publisher = b2.publisher );
+                  
 -- 주문이 있는 고객의 이름과 주소를 보이시오
+select *
+from customer c
+where c.custid in ( select distinct custid from orders );
 
 -- 평균 주문금액 이하의 주문에 대해서 주문번호와 금액을 보이시오
+select avg(saleprice) from orders;
+select *
+from orders o
+where o.saleprice <= ( select avg(saleprice) from orders );
+
 -- 각 고객의 평균 주문금액보다 큰 금액의 주문 내역에 대해서 주문번호, 고객번호, 금액을 보이시오
 -- 대한민국에 거주하는 고객에게 판매한 도서의 총판매액을 구하시오
 -- 3번 고객이 주문한 도서의 최고 금액보다 더 비싼 도서를 구입한 주문의 주문번호와 금액을 보이시오
