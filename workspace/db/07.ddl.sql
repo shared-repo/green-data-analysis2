@@ -165,4 +165,45 @@ insert into emp_temp(empno, deptno, sal)
 values (emp_temp_sequence.nextval, 10, 1000);
 select * from emp_temp;
 
+drop table emp_temp;
 
+-- 테이블 수정
+create table emp_temp
+(
+    empno number(4,0) not null primary key,
+    ename varchar2(10 byte) null,
+    job varchar2(9 byte),
+    mgr number(4,0),
+    hiredate date default(sysdate),
+    sal number(7,2) check(sal > 0),
+    comm number(7,2),
+    deptno number(2,0) not null,
+    constraint fk_emp_temp_to_emp_temp foreign key (mgr) references emp_temp(empno)
+);
+
+-- mobile 컬럼 추가
+alter table emp_temp
+add mobile varchar2(20 byte);
+desc emp_temp;
+
+-- foreign key 추가
+alter table emp_temp
+add constraint fk_emp_temp_to_emp_dept 
+foreign key (deptno) references dept(deptno);
+
+-- 컬럼 변경
+alter table emp_temp
+modify mobile varchar2(20 byte) not null;
+desc emp_temp;
+
+-- 컬럼이름변경
+alter table emp_temp
+rename column mobile to hp;
+desc emp_temp;
+
+-- 테이블 이름 변경
+rename emp_temp to emp_renamed;
+
+alter table emp_renamed
+drop column hp;
+desc emp_renamed;
