@@ -1,28 +1,28 @@
--- ±âÁ¸ Å×ÀÌºí Á¦°Å
+-- ê¸°ì¡´ í…Œì´ë¸” ì œê±°
 drop table dept_temp;
 drop table dept_temp2;
 
--- ±âÁ¸ Å×ÀÌºíÀ» º¹»çÇØ¼­ »õ Å×ÀÌºí ¸¸µé±â -- Á¦¾àÁ¶°ÇÀº º¹Á¦µÇÁö ¾Ê½À´Ï´Ù.
+-- ê¸°ì¡´ í…Œì´ë¸”ì„ ë³µì‚¬í•´ì„œ ìƒˆ í…Œì´ë¸” ë§Œë“¤ê¸° -- ì œì•½ì¡°ê±´ì€ ë³µì œë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
 create table dept_temp3
 as select * from dept;
--- º¹Á¦ÈÄ Å×ÀÌºí ±¸Á¶¸¦ È®ÀÎÇØ¼­ Á¦¾à Á¶°Ç º¹Á¦¿©ºÎ °Ë»ç
+-- ë³µì œí›„ í…Œì´ë¸” êµ¬ì¡°ë¥¼ í™•ì¸í•´ì„œ ì œì•½ ì¡°ê±´ ë³µì œì—¬ë¶€ ê²€ì‚¬
 
--- ÀÚ·áÇü
--- ¼ıÀÚÇü : NUMBER(ÀüÃ¼ÀÚ¸®¼ö, ¼Ò¼öÁ¡ÀÌÇÏÀÚ¸®¼ö)
--- ¹®ÀÚÇü : VARCHAR2(±æÀÌ, CHAR|BYTE), CHAR(±æÀÌ, CHAR|BYTE)
--- ³¯Â¥Çü : date, datetime
+-- ìë£Œí˜•
+-- ìˆ«ìí˜• : NUMBER(ì „ì²´ìë¦¬ìˆ˜, ì†Œìˆ˜ì ì´í•˜ìë¦¬ìˆ˜)
+-- ë¬¸ìí˜• : VARCHAR2(ê¸¸ì´, CHAR|BYTE), CHAR(ê¸¸ì´, CHAR|BYTE)
+-- ë‚ ì§œí˜• : date, datetime
 
--- µµ¸ŞÀÎ : ÀÚ·áÇü + Á¦¾àÁ¶°Ç ( »ç¿ëÀÚ Á¤ÀÇ ÀÚ·áÇü )
+-- ë„ë©”ì¸ : ìë£Œí˜• + ì œì•½ì¡°ê±´ ( ì‚¬ìš©ì ì •ì˜ ìë£Œí˜• )
 
--- Á÷Á¢ Å×ÀÌºí ±¸Á¶¸¦ ÁöÁ¤ÇØ¼­ Å×ÀÌºí »ı¼º
+-- ì§ì ‘ í…Œì´ë¸” êµ¬ì¡°ë¥¼ ì§€ì •í•´ì„œ í…Œì´ë¸” ìƒì„±
 DESC EMP;
 create table emp_temp
 (
-    -- ÄÃ·³ÀÌ¸§ ÀÚ·áÇü [null?] [±âº»Å°] [¿Ü·¡Å°] [check] [default-value]
-    empno number(4,0) not null,   -- null ºÒÇã¿ë
-    ename varchar2(10 byte) null, -- null Çã¿ë (default)
+    -- ì»¬ëŸ¼ì´ë¦„ ìë£Œí˜• [null?] [ê¸°ë³¸í‚¤] [ì™¸ë˜í‚¤] [check] [default-value]
+    empno number(4,0) not null,   -- null ë¶ˆí—ˆìš©
+    ename varchar2(10 byte) null, -- null í—ˆìš© (default)
     job varchar2(9 byte),
-    mgr number(4,0), -- empno ÂüÁ¶
+    mgr number(4,0), -- empno ì°¸ì¡°
     hiredate date,
     sal number(7,2),
     comm number(7,2),
@@ -32,52 +32,52 @@ insert into emp_temp(empno, ename)
 values(1, 'john doe');
 select * from emp_temp;
 
--- ¿À·ù : empno´Â not nullÀÌ¹Ç·Î ¹İµå½Ã µ¥ÀÌÅÍ ÁöÁ¤ ÇÊ¿ä
+-- ì˜¤ë¥˜ : empnoëŠ” not nullì´ë¯€ë¡œ ë°˜ë“œì‹œ ë°ì´í„° ì§€ì • í•„ìš”
 insert into emp_temp(ename, job) 
 values('jane doe', 'sales');
 
 drop table emp_temp;
 
--- Á÷Á¢ Å×ÀÌºí ±¸Á¶¸¦ ÁöÁ¤ÇØ¼­ Å×ÀÌºí »ı¼º 2
+-- ì§ì ‘ í…Œì´ë¸” êµ¬ì¡°ë¥¼ ì§€ì •í•´ì„œ í…Œì´ë¸” ìƒì„± 2
 create table emp_temp
 (
-    -- ÄÃ·³ÀÌ¸§ ÀÚ·áÇü [null?] [±âº»Å°] [¿Ü·¡Å°] [check] [default-value]
-    -- empno number(4,0) not null primary key, -- ±âº»Å° ÁöÁ¤
+    -- ì»¬ëŸ¼ì´ë¦„ ìë£Œí˜• [null?] [ê¸°ë³¸í‚¤] [ì™¸ë˜í‚¤] [check] [default-value]
+    -- empno number(4,0) not null primary key, -- ê¸°ë³¸í‚¤ ì§€ì •
     empno number(4,0) not null,
-    ename varchar2(10 byte) null, -- null Çã¿ë (default)
+    ename varchar2(10 byte) null, -- null í—ˆìš© (default)
     job varchar2(9 byte),
-    mgr number(4,0), -- empno ÂüÁ¶
+    mgr number(4,0), -- empno ì°¸ì¡°
     hiredate date,
     sal number(7,2),
     comm number(7,2),
     deptno number(2,0),
-    -- primary key (empno) -- empno¸¦ pk·Î ÁöÁ¤
-    constraint pk_emp_temp primary key (empno), -- empno¸¦ pk·Î ÁöÁ¤
-    constraint fk_emp_temp_to_dept -- ÀÌ ÇàÀº »ı·« °¡´É
+    -- primary key (empno) -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint pk_emp_temp primary key (empno), -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint fk_emp_temp_to_dept -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (deptno) references dept(deptno),
-    constraint fk_emp_temp_to_emp_temp -- ÀÌ ÇàÀº »ı·« °¡´É
+    constraint fk_emp_temp_to_emp_temp -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (mgr) references emp_temp(empno)
 );
 drop table emp_temp;
 
--- Á÷Á¢ Å×ÀÌºí ±¸Á¶¸¦ ÁöÁ¤ÇØ¼­ Å×ÀÌºí »ı¼º 3
+-- ì§ì ‘ í…Œì´ë¸” êµ¬ì¡°ë¥¼ ì§€ì •í•´ì„œ í…Œì´ë¸” ìƒì„± 3
 create table emp_temp
 (
-    -- ÄÃ·³ÀÌ¸§ ÀÚ·áÇü [null?] [±âº»Å°] [¿Ü·¡Å°] [check] [default-value]
-    -- empno number(4,0) not null primary key, -- ±âº»Å° ÁöÁ¤
+    -- ì»¬ëŸ¼ì´ë¦„ ìë£Œí˜• [null?] [ê¸°ë³¸í‚¤] [ì™¸ë˜í‚¤] [check] [default-value]
+    -- empno number(4,0) not null primary key, -- ê¸°ë³¸í‚¤ ì§€ì •
     empno number(4,0) not null,
-    ename varchar2(10 byte) null, -- null Çã¿ë (default)
+    ename varchar2(10 byte) null, -- null í—ˆìš© (default)
     job varchar2(9 byte),
-    mgr number(4,0), -- empno ÂüÁ¶
+    mgr number(4,0), -- empno ì°¸ì¡°
     hiredate date default(sysdate),
     sal number(7,2),
     comm number(7,2),
     deptno number(2,0),
-    -- primary key (empno) -- empno¸¦ pk·Î ÁöÁ¤
-    constraint pk_emp_temp primary key (empno), -- empno¸¦ pk·Î ÁöÁ¤
-    constraint fk_emp_temp_to_dept -- ÀÌ ÇàÀº »ı·« °¡´É
+    -- primary key (empno) -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint pk_emp_temp primary key (empno), -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint fk_emp_temp_to_dept -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (deptno) references dept(deptno),
-    constraint fk_emp_temp_to_emp_temp -- ÀÌ ÇàÀº »ı·« °¡´É
+    constraint fk_emp_temp_to_emp_temp -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (mgr) references emp_temp(empno)
 );
 insert into emp_temp (empno)
@@ -85,78 +85,78 @@ values (1);
 select * from emp_temp;
 drop table emp_temp;
 
--- Á÷Á¢ Å×ÀÌºí ±¸Á¶¸¦ ÁöÁ¤ÇØ¼­ Å×ÀÌºí »ı¼º 4
+-- ì§ì ‘ í…Œì´ë¸” êµ¬ì¡°ë¥¼ ì§€ì •í•´ì„œ í…Œì´ë¸” ìƒì„± 4
 create table emp_temp
 (
-    -- ÄÃ·³ÀÌ¸§ ÀÚ·áÇü [null?] [±âº»Å°] [¿Ü·¡Å°] [check] [default-value]
-    -- empno number(4,0) not null primary key, -- ±âº»Å° ÁöÁ¤
+    -- ì»¬ëŸ¼ì´ë¦„ ìë£Œí˜• [null?] [ê¸°ë³¸í‚¤] [ì™¸ë˜í‚¤] [check] [default-value]
+    -- empno number(4,0) not null primary key, -- ê¸°ë³¸í‚¤ ì§€ì •
     empno number(4,0) not null,
-    ename varchar2(10 byte) null, -- null Çã¿ë (default)
+    ename varchar2(10 byte) null, -- null í—ˆìš© (default)
     job varchar2(9 byte),
-    mgr number(4,0), -- ÀÚ±â ÂüÁ¶ Å×ÀÌºíÀÇ foreign key´Â null Çã¿ë
+    mgr number(4,0), -- ìê¸° ì°¸ì¡° í…Œì´ë¸”ì˜ foreign keyëŠ” null í—ˆìš©
     hiredate date default(sysdate),
     sal number(7,2),
     comm number(7,2),
-    deptno number(2,0) not null, -- º¸Åë foreign key columnÀº not null·Î ÁöÁ¤
-    -- primary key (empno) -- empno¸¦ pk·Î ÁöÁ¤
-    constraint pk_emp_temp primary key (empno), -- empno¸¦ pk·Î ÁöÁ¤
-    constraint fk_emp_temp_to_dept -- ÀÌ ÇàÀº »ı·« °¡´É
+    deptno number(2,0) not null, -- ë³´í†µ foreign key columnì€ not nullë¡œ ì§€ì •
+    -- primary key (empno) -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint pk_emp_temp primary key (empno), -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint fk_emp_temp_to_dept -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (deptno) references dept(deptno),
-    constraint fk_emp_temp_to_emp_temp -- ÀÌ ÇàÀº »ı·« °¡´É
+    constraint fk_emp_temp_to_emp_temp -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (mgr) references emp_temp(empno)
 );
 insert into emp_temp(empno, deptno)
-values (1, 10); -- deptno´Â ¹İµå½Ã dept Å×ÀÌºí¿¡ Á¸ÀçÇÏ´Â °ªÀ» »ç¿ëÇØ¾ß ÇÕ´Ï´Ù.
+values (1, 10); -- deptnoëŠ” ë°˜ë“œì‹œ dept í…Œì´ë¸”ì— ì¡´ì¬í•˜ëŠ” ê°’ì„ ì‚¬ìš©í•´ì•¼ í•©ë‹ˆë‹¤.
 select * from emp_temp;
 commit;
-delete from dept where deptno = 10; -- ´Ù¸¥ Å×ÀÌºí¿¡¼­ ÂüÁ¶ÇÏ°í ÀÖ´Â µ¥ÀÌÅÍ´Â »èÁ¦ ºÒ°¡´É
+delete from dept where deptno = 10; -- ë‹¤ë¥¸ í…Œì´ë¸”ì—ì„œ ì°¸ì¡°í•˜ê³  ìˆëŠ” ë°ì´í„°ëŠ” ì‚­ì œ ë¶ˆê°€ëŠ¥
 
 drop table emp_temp;
 
--- Á÷Á¢ Å×ÀÌºí ±¸Á¶¸¦ ÁöÁ¤ÇØ¼­ Å×ÀÌºí »ı¼º 5
+-- ì§ì ‘ í…Œì´ë¸” êµ¬ì¡°ë¥¼ ì§€ì •í•´ì„œ í…Œì´ë¸” ìƒì„± 5
 create table emp_temp
 (
-    -- ÄÃ·³ÀÌ¸§ ÀÚ·áÇü [null?] [±âº»Å°] [¿Ü·¡Å°] [check] [default-value]
-    -- empno number(4,0) not null primary key, -- ±âº»Å° ÁöÁ¤
+    -- ì»¬ëŸ¼ì´ë¦„ ìë£Œí˜• [null?] [ê¸°ë³¸í‚¤] [ì™¸ë˜í‚¤] [check] [default-value]
+    -- empno number(4,0) not null primary key, -- ê¸°ë³¸í‚¤ ì§€ì •
     empno number(4,0) not null,
-    ename varchar2(10 byte) null, -- null Çã¿ë (default)
+    ename varchar2(10 byte) null, -- null í—ˆìš© (default)
     job varchar2(9 byte),
-    mgr number(4,0), -- ÀÚ±â ÂüÁ¶ Å×ÀÌºíÀÇ foreign key´Â null Çã¿ë
+    mgr number(4,0), -- ìê¸° ì°¸ì¡° í…Œì´ë¸”ì˜ foreign keyëŠ” null í—ˆìš©
     hiredate date default(sysdate),
     sal number(7,2) check(sal > 0),
     comm number(7,2),
-    deptno number(2,0) not null, -- º¸Åë foreign key columnÀº not null·Î ÁöÁ¤
-    -- primary key (empno) -- empno¸¦ pk·Î ÁöÁ¤
-    constraint pk_emp_temp primary key (empno), -- empno¸¦ pk·Î ÁöÁ¤
-    constraint fk_emp_temp_to_dept -- ÀÌ ÇàÀº »ı·« °¡´É
+    deptno number(2,0) not null, -- ë³´í†µ foreign key columnì€ not nullë¡œ ì§€ì •
+    -- primary key (empno) -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint pk_emp_temp primary key (empno), -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint fk_emp_temp_to_dept -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (deptno) references dept(deptno),
-    constraint fk_emp_temp_to_emp_temp -- ÀÌ ÇàÀº »ı·« °¡´É
+    constraint fk_emp_temp_to_emp_temp -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (mgr) references emp_temp(empno)
 );
 insert into emp_temp (empno, deptno, sal)
-values (1, 10, -1000); -- check Á¦¾àÁ¶°Ç À§¹İ insert ½ÇÆĞ
+values (1, 10, -1000); -- check ì œì•½ì¡°ê±´ ìœ„ë°˜ insert ì‹¤íŒ¨
 select * from emp_temp;
 
 drop table emp_temp;
 
--- Á÷Á¢ Å×ÀÌºí ±¸Á¶¸¦ ÁöÁ¤ÇØ¼­ Å×ÀÌºí »ı¼º 6
+-- ì§ì ‘ í…Œì´ë¸” êµ¬ì¡°ë¥¼ ì§€ì •í•´ì„œ í…Œì´ë¸” ìƒì„± 6
 create table emp_temp
 (
-    -- ÄÃ·³ÀÌ¸§ ÀÚ·áÇü [null?] [±âº»Å°] [¿Ü·¡Å°] [check] [default-value]
-    -- empno number(4,0) not null primary key, -- ±âº»Å° ÁöÁ¤
+    -- ì»¬ëŸ¼ì´ë¦„ ìë£Œí˜• [null?] [ê¸°ë³¸í‚¤] [ì™¸ë˜í‚¤] [check] [default-value]
+    -- empno number(4,0) not null primary key, -- ê¸°ë³¸í‚¤ ì§€ì •
     empno number(4,0) not null,
-    ename varchar2(10 byte) null, -- null Çã¿ë (default)
+    ename varchar2(10 byte) null, -- null í—ˆìš© (default)
     job varchar2(9 byte),
-    mgr number(4,0), -- ÀÚ±â ÂüÁ¶ Å×ÀÌºíÀÇ foreign key´Â null Çã¿ë
+    mgr number(4,0), -- ìê¸° ì°¸ì¡° í…Œì´ë¸”ì˜ foreign keyëŠ” null í—ˆìš©
     hiredate date default(sysdate),
     sal number(7,2) check(sal > 0),
     comm number(7,2),
-    deptno number(2,0) not null, -- º¸Åë foreign key columnÀº not null·Î ÁöÁ¤
-    -- primary key (empno) -- empno¸¦ pk·Î ÁöÁ¤
-    constraint pk_emp_temp primary key (empno), -- empno¸¦ pk·Î ÁöÁ¤
-    constraint fk_emp_temp_to_dept -- ÀÌ ÇàÀº »ı·« °¡´É
+    deptno number(2,0) not null, -- ë³´í†µ foreign key columnì€ not nullë¡œ ì§€ì •
+    -- primary key (empno) -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint pk_emp_temp primary key (empno), -- empnoë¥¼ pkë¡œ ì§€ì •
+    constraint fk_emp_temp_to_dept -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (deptno) references dept(deptno),
-    constraint fk_emp_temp_to_emp_temp -- ÀÌ ÇàÀº »ı·« °¡´É
+    constraint fk_emp_temp_to_emp_temp -- ì´ í–‰ì€ ìƒëµ ê°€ëŠ¥
     foreign key (mgr) references emp_temp(empno)
 );
 create sequence emp_temp_sequence;
@@ -167,7 +167,7 @@ select * from emp_temp;
 
 drop table emp_temp;
 
--- Å×ÀÌºí ¼öÁ¤
+-- í…Œì´ë¸” ìˆ˜ì •
 create table emp_temp
 (
     empno number(4,0) not null primary key,
@@ -181,27 +181,27 @@ create table emp_temp
     constraint fk_emp_temp_to_emp_temp foreign key (mgr) references emp_temp(empno)
 );
 
--- mobile ÄÃ·³ Ãß°¡
+-- mobile ì»¬ëŸ¼ ì¶”ê°€
 alter table emp_temp
 add mobile varchar2(20 byte);
 desc emp_temp;
 
--- foreign key Ãß°¡
+-- foreign key ì¶”ê°€
 alter table emp_temp
 add constraint fk_emp_temp_to_emp_dept 
 foreign key (deptno) references dept(deptno);
 
--- ÄÃ·³ º¯°æ
+-- ì»¬ëŸ¼ ë³€ê²½
 alter table emp_temp
 modify mobile varchar2(20 byte) not null;
 desc emp_temp;
 
--- ÄÃ·³ÀÌ¸§º¯°æ
+-- ì»¬ëŸ¼ì´ë¦„ë³€ê²½
 alter table emp_temp
 rename column mobile to hp;
 desc emp_temp;
 
--- Å×ÀÌºí ÀÌ¸§ º¯°æ
+-- í…Œì´ë¸” ì´ë¦„ ë³€ê²½
 rename emp_temp to emp_renamed;
 
 alter table emp_renamed
