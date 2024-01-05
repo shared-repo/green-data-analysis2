@@ -112,6 +112,31 @@ from
 where c.custid = o.custid
 group by c.custid, c.name;
 
+-- 도서의 판매액 평균보다 자신의 구매액 평균이 더 높은 고객의 이름
+select distinct c.name
+from customer c, orders o
+where c.custid = o.custid
+      and 
+      (select avg(o3.saleprice) from orders o3 where o3.custid = c.custid) > 
+      (select avg(o2.saleprice) from orders o2);
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
