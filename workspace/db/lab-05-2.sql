@@ -70,3 +70,22 @@ where e1.department_id = d.department_id
       and l.city like 'O%';
 
 -- 모든 사원의 소속부서 평균연봉을 계산하여 사원별로 이름과 성(Name으로 별칭), 업무, 급여, 부서번호, 부서평균연봉(Department Avg Salary로 별칭)을 출력하시오
+select 
+    e1.first_name || ' ' || e1.last_name name,
+    e1.job_id,
+    e1.department_id,
+    e1.salary,
+--    현재 처리중인 e1의 행이 속한 부서의 평균 급여
+    ( select round(avg(salary), 0)
+      from employees e2
+      where e2.department_id = e1.department_id ) 부서평균급여
+from employees e1;
+
+
+
+
+
+
+
+
+
