@@ -1,0 +1,53 @@
+1. 원격저장소의 모든 내용을 다운로드하고 로컬 저장소 구성
+
+   git clone remote-repository-address
+
+2. 작업 디렉터리 + 로컬 저장소의 변경 사항 표시
+
+   git status
+
+3. 변경 사항을 관리 영역으로 이동
+
+   git add file-name | directory
+
+4. 변경 사항을 로컬 저장소에 적용
+
+   git commit -m "message"
+
+5. 로컬 저장소에 적용된 변경 사항을 원격 저장소에 적용
+
+   git push origin main
+
+6. 충돌관리
+
+==========================
+
+7. branch 만들기
+
+   git branch new_branch base_branch
+
+8. branch 목록 보기
+
+   git branch
+
+9. branch 전환
+
+   git checkout branch_name ( switch + restore )
+   git switch branch_name ( only switch )
+
+10. branch 병합 (현재 branch에 지정된 대상 branch 병합)
+
+     git merge branch_name
+
+11. 로컬 branch 삭제
+
+    git branch -d | -D branch_name
+
+12. 원격 branch 삭제
+
+   git push origin -d branch_name
+
+
+
+
+
