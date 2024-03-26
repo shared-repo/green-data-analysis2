@@ -1,0 +1,26 @@
+var tooltip_panes = document.querySelectorAll('.leaflet-interactive');
+    for (var i = 0; i < tooltip_panes.length; i++) {
+        
+        tooltip_panes[i].addEventListener('focus', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            // alert(event.target.style.borderWidth);
+            event.target.blur();
+
+        });
+        tooltip_panes[i].addEventListener('mouseenter', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const tooltip_pane = document.querySelector('.leaflet-pane.leaflet-tooltip-pane')
+            const popup_pane = document.querySelector('.leaflet-pane.leaflet-popup-pane')
+            if (popup_pane.children.length > 0) {
+                tooltip_pane.children[0].remove()
+            }
+        });
+        tooltip_panes[i].addEventListener('mouseleave', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const pane = document.querySelector('.leaflet-pane.leaflet-tooltip-pane')
+            console.log('mouse-leave ' + (pane.children));
+        });
+    }
